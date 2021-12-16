@@ -1,1 +1,1322 @@
-{"swagger":"2.0","info":{"title":"Default title","description":"A sample custom connector to demonstrate calling the Power BI REST API with a user identity. Using this connector does not require Power BI Administrator permissions.","version":"1.0"},"host":"api.powerbi.com","basePath":"/v1.0/myorg/","schemes":["https"],"consumes":[],"produces":[],"paths":{"/groups":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"@odata.count":{"type":"integer","format":"int32","description":"@odata.count"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"isReadOnly":{"type":"boolean","description":"isReadOnly"},"isOnDedicatedCapacity":{"type":"boolean","description":"isOnDedicatedCapacity"},"capacityId":{"type":"string","description":"capacityId"},"type":{"type":"string","description":"type"},"name":{"type":"string","description":"name"}}},"description":"value"}}}}},"summary":"Get Workspaces","description":"Get Workspaces","operationId":"GetWorkspaces","parameters":[{"name":"$filter","in":"query","required":false,"type":"string"},{"name":"$top","in":"query","required":false,"type":"integer","default":100},{"name":"$skip","in":"query","required":false,"type":"string"}]},"post":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"id":{"type":"string","description":"id"},"isReadOnly":{"type":"boolean","description":"isReadOnly"},"isOnDedicatedCapacity":{"type":"boolean","description":"isOnDedicatedCapacity"},"name":{"type":"string","description":"name"}}}}},"summary":"Create Workspace","description":"Create Workspace","operationId":"CreateWorkspace","parameters":[{"name":"body","in":"body","required":false,"schema":{"type":"object","properties":{"name":{"type":"string","description":"name"}}}}]}},"/groups/{WorkspaceId}/reports/{ReportId}":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"datasetId":{"type":"string","description":"datasetId"},"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"}}}}},"summary":"Get Report In Workspace","description":"Get Report In Workspace","operationId":"GetReportInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"ReportId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/reports":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"reportType":{"type":"string","description":"reportType"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"},"isFromPbix":{"type":"boolean","description":"isFromPbix"},"isOwnedByMe":{"type":"boolean","description":"isOwnedByMe"},"datasetId":{"type":"string","description":"datasetId"},"datasetWorkspaceId":{"type":"string","description":"datasetWorkspaceId"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"}}},"description":"value"}}}}},"summary":"Get Reports In Workspace","description":"Get Reports In Workspace","operationId":"GetReportsInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/reports/{ReportId}/pages":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"Name":{"type":"string","description":"Name"},"displayName":{"type":"string","description":"displayName"},"order":{"type":"integer","format":"int32","description":"order"}}},"description":"value"}}}}},"summary":"Get Pages In Report","description":"Get Pages In Report","operationId":"GetPagesInReport","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"ReportId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/reports/{ReportId}/pages/{PageName}":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"Name":{"type":"string","description":"Name"},"displayName":{"type":"string","description":"displayName"},"order":{"type":"integer","format":"int32","description":"order"}}}}},"summary":"Get Page In Report","description":"Get Page In Report","operationId":"GetPageInReport","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"ReportId","in":"path","required":true,"type":"string"},{"name":"PageName","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/datasets/{DatasetId}":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"addRowsAPIEnabled":{"type":"boolean","description":"addRowsAPIEnabled"},"configuredBy":{"type":"string","description":"configuredBy"},"isRefreshable":{"type":"boolean","description":"isRefreshable"},"isEffectiveIdentityRequired":{"type":"boolean","description":"isEffectiveIdentityRequired"},"isEffectiveIdentityRolesRequired":{"type":"boolean","description":"isEffectiveIdentityRolesRequired"},"isOnPremGatewayRequired":{"type":"boolean","description":"isOnPremGatewayRequired"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"createdDate":{"type":"string","description":"createdDate"},"createReportEmbedURL":{"type":"string","description":"createReportEmbedURL"},"qnaEmbedURL":{"type":"string","description":"qnaEmbedURL"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}}}},"summary":"Get Dataset in Workspace","description":"Get Dataset in Workspace","operationId":"GetDatasetInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"DatasetId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/datasets":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"addRowsAPIEnabled":{"type":"boolean","description":"addRowsAPIEnabled"},"configuredBy":{"type":"string","description":"configuredBy"},"isRefreshable":{"type":"boolean","description":"isRefreshable"},"isEffectiveIdentityRequired":{"type":"boolean","description":"isEffectiveIdentityRequired"},"isEffectiveIdentityRolesRequired":{"type":"boolean","description":"isEffectiveIdentityRolesRequired"},"isOnPremGatewayRequired":{"type":"boolean","description":"isOnPremGatewayRequired"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"createdDate":{"type":"string","description":"createdDate"},"createReportEmbedURL":{"type":"string","description":"createReportEmbedURL"},"qnaEmbedURL":{"type":"string","description":"qnaEmbedURL"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}},"description":"value"}}}}},"summary":"Get Datasets in Workspace","description":"Get Datasets in Workspace","operationId":"GetDatasetsInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}":{"delete":{"responses":{"default":{"description":"default","schema":{}}},"summary":"Delete Workspace","description":"Delete Workspace","operationId":"DeleteWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/dashboards":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"displayName":{"type":"string","description":"displayName"},"isReadOnly":{"type":"boolean","description":"isReadOnly"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"}}},"description":"value"}}}}},"summary":"Get Dashboard In Workspace","description":"Get Dashboard In Workspace","operationId":"GetDashboardInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/dataflows":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"value":{"type":"array","items":{"type":"object","properties":{"objectId":{"type":"string","description":"objectId"},"name":{"type":"string","description":"name"},"description":{"type":"string","description":"description"},"configuredBy":{"type":"string","description":"configuredBy"},"modelUrl":{"type":"string","description":"modelUrl"}}},"description":"value"}}}}},"summary":"Get Dataflows In Workspace","description":"Get Dataflows In Workspace","operationId":"GetDataflowsInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/imports":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"importState":{"type":"string","description":"importState"},"createdDateTime":{"type":"string","description":"createdDateTime"},"updatedDateTime":{"type":"string","description":"updatedDateTime"},"name":{"type":"string","description":"name"},"connectionType":{"type":"string","description":"connectionType"},"source":{"type":"string","description":"source"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}},"description":"datasets"},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"reportType":{"type":"string","description":"reportType"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"}}},"description":"reports"},"dataflows":{"type":"array","items":{},"description":"dataflows"}}},"description":"value"}}}}},"summary":"Get Imports In Workspace","description":"Get Imports In Workspace","operationId":"GetImportsInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]},"post":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"id":{"type":"string","description":"id"}}}}},"summary":"Import PBIX To Workspace","operationId":"ImportPbixToWorkspace","description":"Import PBIX To Workspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"datasetDisplayName","in":"query","required":false,"type":"string"},{"name":"nameConflict","in":"query","required":false,"type":"string"},{"name":"skipReport","in":"query","required":false,"type":"string"},{"name":"overrideReportLabel","in":"query","required":false,"type":"string"},{"name":"overrideModelLabel","in":"query","required":false,"type":"string"},{"name":"Content-Type","in":"header","required":false,"type":"string","default":"multipart/form-data"},{"name":"Content-Length","in":"header","required":false,"type":"number"},{"name":"body","in":"body","required":true,"schema":{"type":"string"}}]}},"/groups/{WorkspaceId}/AssignToCapacity":{"post":{"responses":{"default":{"description":"default","schema":{}}},"summary":"Assign Workspace To Capacity","operationId":"AssignWorkspaceToCapacity","description":"Assign Workspace To Capacity","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"body","in":"body","required":false,"schema":{"type":"object","properties":{"capacityId":{"type":"string","description":"capacityId"}}}}]}},"/capacities":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"displayName":{"type":"string","description":"displayName"},"admins":{"type":"array","items":{"type":"string"},"description":"admins"},"sku":{"type":"string","description":"sku"},"state":{"type":"string","description":"state"},"capacityUserAccessRight":{"type":"string","description":"capacityUserAccessRight"},"region":{"type":"string","description":"region"},"users":{"type":"array","items":{},"description":"users"}}},"description":"value"}}}}},"summary":"Get Capacities","description":"Get Capacities","operationId":"GetCapacities","parameters":[]}},"/groups/{WorkspaceId}/users":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"value":{"type":"array","items":{"type":"object","properties":{"displayName":{"type":"string","description":"displayName"},"emailAddress":{"type":"string","description":"emailAddress"},"groupUserAccessRight":{"type":"string","description":"groupUserAccessRight"},"identifier":{"type":"string","description":"identifier"},"principalType":{"type":"string","description":"principalType"}}},"description":"value"}}}}},"summary":"Get Workspace Users","operationId":"GetWorkspaceUsers","description":"Get Workspace Users","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]},"post":{"responses":{"default":{"description":"default","schema":{}}},"summary":"Add Workspace User","description":"Add Workspace User","operationId":"AddWorkspaceUser","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"body","in":"body","required":false,"schema":{"type":"object","properties":{"identifier":{"type":"string","description":"identifier"},"emailAddress":{"type":"string","description":"identifier"},"groupUserAccessRight":{"type":"string","description":"groupUserAccessRight"},"principalType":{"type":"string","description":"principalType"}}}}]}},"/groups/{Workspaced}/datasets/{DatasetId}/datasources":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"value":{"type":"array","items":{"type":"object","properties":{"datasourceType":{"type":"string","description":"datasourceType"},"datasourceId":{"type":"string","description":"datasourceId"},"gatewayId":{"type":"string","description":"gatewayId"},"connectionDetails":{"type":"object","properties":{"server":{"type":"string","description":"server"},"database":{"type":"string","description":"database"},"url":{"type":"string","description":"url"},"sharePointSiteUrl":{"type":"string","description":"sharePointSiteUrl"}},"description":"connectionDetails"}}},"description":"value"}}}}},"summary":"Get Datasources In Workspace","description":"Get Datasources In Workspace","operationId":"GetDatasourcesInWorkspace","parameters":[{"name":"Workspaced","in":"path","required":true,"type":"string"},{"name":"DatasetId","in":"path","required":true,"type":"string"}]}},"/groups/{WorkspaceId}/datasets/{DatasetId}/refreshes":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"value":{"type":"array","items":{"type":"object","properties":{"refreshType":{"type":"string","description":"refreshType"},"startTime":{"type":"string","description":"startTime"},"endTime":{"type":"string","description":"endTime"},"status":{"type":"string","description":"status"},"requestId":{"type":"string","description":"requestId"},"serviceExceptionJson":{"type":"string","description":"serviceExceptionJson"}}},"description":"value"}}}}},"summary":"Get Refresh History In Workspace","description":"Get Refresh History In Workspace","operationId":"GetRefreshHistoryInWorkspace","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"},{"name":"DatasetId","in":"path","required":true,"type":"string"}]}}},"definitions":{},"parameters":{},"responses":{},"securityDefinitions":{"oauth2_auth":{"type":"oauth2","flow":"accessCode","authorizationUrl":"https://login.windows.net/common/oauth2/authorize","tokenUrl":"https://login.windows.net/common/oauth2/authorize","scopes":{}}},"security":[{"oauth2_auth":[]}],"tags":[]}
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Default title",
+    "description": "A sample custom connector to demonstrate calling the Power BI REST API with a user identity. Using this connector does not require Power BI Administrator permissions.",
+    "version": "1.0"
+  },
+  "host": "api.powerbi.com",
+  "basePath": "/v1.0/myorg/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/groups": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "@odata.count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "@odata.count"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "isReadOnly": {
+                        "type": "boolean",
+                        "description": "isReadOnly"
+                      },
+                      "isOnDedicatedCapacity": {
+                        "type": "boolean",
+                        "description": "isOnDedicatedCapacity"
+                      },
+                      "capacityId": {
+                        "type": "string",
+                        "description": "capacityId"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Workspaces",
+        "description": "Get Workspaces",
+        "operationId": "GetWorkspaces",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "isReadOnly": {
+                  "type": "boolean",
+                  "description": "isReadOnly"
+                },
+                "isOnDedicatedCapacity": {
+                  "type": "boolean",
+                  "description": "isOnDedicatedCapacity"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create Workspace",
+        "description": "Create Workspace",
+        "operationId": "CreateWorkspace",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/reports/{ReportId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "datasetId": {
+                  "type": "string",
+                  "description": "datasetId"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                },
+                "webUrl": {
+                  "type": "string",
+                  "description": "webUrl"
+                },
+                "embedUrl": {
+                  "type": "string",
+                  "description": "embedUrl"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Report In Workspace",
+        "description": "Get Report In Workspace",
+        "operationId": "GetReportInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ReportId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/reports": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "reportType": {
+                        "type": "string",
+                        "description": "reportType"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "webUrl": {
+                        "type": "string",
+                        "description": "webUrl"
+                      },
+                      "embedUrl": {
+                        "type": "string",
+                        "description": "embedUrl"
+                      },
+                      "isFromPbix": {
+                        "type": "boolean",
+                        "description": "isFromPbix"
+                      },
+                      "isOwnedByMe": {
+                        "type": "boolean",
+                        "description": "isOwnedByMe"
+                      },
+                      "datasetId": {
+                        "type": "string",
+                        "description": "datasetId"
+                      },
+                      "datasetWorkspaceId": {
+                        "type": "string",
+                        "description": "datasetWorkspaceId"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      },
+                      "subscriptions": {
+                        "type": "array",
+                        "items": {},
+                        "description": "subscriptions"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Reports In Workspace",
+        "description": "Get Reports In Workspace",
+        "operationId": "GetReportsInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/reports/{ReportId}/pages": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Name": {
+                        "type": "string",
+                        "description": "Name"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "order"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Pages In Report",
+        "description": "Get Pages In Report",
+        "operationId": "GetPagesInReport",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ReportId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/reports/{ReportId}/pages/{PageName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "description": "Name"
+                },
+                "displayName": {
+                  "type": "string",
+                  "description": "displayName"
+                },
+                "order": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "order"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Page In Report",
+        "description": "Get Page In Report",
+        "operationId": "GetPageInReport",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ReportId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PageName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/datasets/{DatasetId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                },
+                "webUrl": {
+                  "type": "string",
+                  "description": "webUrl"
+                },
+                "addRowsAPIEnabled": {
+                  "type": "boolean",
+                  "description": "addRowsAPIEnabled"
+                },
+                "configuredBy": {
+                  "type": "string",
+                  "description": "configuredBy"
+                },
+                "isRefreshable": {
+                  "type": "boolean",
+                  "description": "isRefreshable"
+                },
+                "isEffectiveIdentityRequired": {
+                  "type": "boolean",
+                  "description": "isEffectiveIdentityRequired"
+                },
+                "isEffectiveIdentityRolesRequired": {
+                  "type": "boolean",
+                  "description": "isEffectiveIdentityRolesRequired"
+                },
+                "isOnPremGatewayRequired": {
+                  "type": "boolean",
+                  "description": "isOnPremGatewayRequired"
+                },
+                "targetStorageMode": {
+                  "type": "string",
+                  "description": "targetStorageMode"
+                },
+                "createdDate": {
+                  "type": "string",
+                  "description": "createdDate"
+                },
+                "createReportEmbedURL": {
+                  "type": "string",
+                  "description": "createReportEmbedURL"
+                },
+                "qnaEmbedURL": {
+                  "type": "string",
+                  "description": "qnaEmbedURL"
+                },
+                "upstreamDatasets": {
+                  "type": "array",
+                  "items": {},
+                  "description": "upstreamDatasets"
+                },
+                "schemaMayNotBeUpToDate": {
+                  "type": "boolean",
+                  "description": "schemaMayNotBeUpToDate"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {},
+                  "description": "users"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Dataset in Workspace",
+        "description": "Get Dataset in Workspace",
+        "operationId": "GetDatasetInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DatasetId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/datasets": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "webUrl": {
+                        "type": "string",
+                        "description": "webUrl"
+                      },
+                      "addRowsAPIEnabled": {
+                        "type": "boolean",
+                        "description": "addRowsAPIEnabled"
+                      },
+                      "configuredBy": {
+                        "type": "string",
+                        "description": "configuredBy"
+                      },
+                      "isRefreshable": {
+                        "type": "boolean",
+                        "description": "isRefreshable"
+                      },
+                      "isEffectiveIdentityRequired": {
+                        "type": "boolean",
+                        "description": "isEffectiveIdentityRequired"
+                      },
+                      "isEffectiveIdentityRolesRequired": {
+                        "type": "boolean",
+                        "description": "isEffectiveIdentityRolesRequired"
+                      },
+                      "isOnPremGatewayRequired": {
+                        "type": "boolean",
+                        "description": "isOnPremGatewayRequired"
+                      },
+                      "targetStorageMode": {
+                        "type": "string",
+                        "description": "targetStorageMode"
+                      },
+                      "createdDate": {
+                        "type": "string",
+                        "description": "createdDate"
+                      },
+                      "createReportEmbedURL": {
+                        "type": "string",
+                        "description": "createReportEmbedURL"
+                      },
+                      "qnaEmbedURL": {
+                        "type": "string",
+                        "description": "qnaEmbedURL"
+                      },
+                      "upstreamDatasets": {
+                        "type": "array",
+                        "items": {},
+                        "description": "upstreamDatasets"
+                      },
+                      "schemaMayNotBeUpToDate": {
+                        "type": "boolean",
+                        "description": "schemaMayNotBeUpToDate"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Datasets in Workspace",
+        "description": "Get Datasets in Workspace",
+        "operationId": "GetDatasetsInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}": {
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Delete Workspace",
+        "description": "Delete Workspace",
+        "operationId": "DeleteWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/dashboards": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "isReadOnly": {
+                        "type": "boolean",
+                        "description": "isReadOnly"
+                      },
+                      "webUrl": {
+                        "type": "string",
+                        "description": "webUrl"
+                      },
+                      "embedUrl": {
+                        "type": "string",
+                        "description": "embedUrl"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      },
+                      "subscriptions": {
+                        "type": "array",
+                        "items": {},
+                        "description": "subscriptions"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Dashboard In Workspace",
+        "description": "Get Dashboard In Workspace",
+        "operationId": "GetDashboardInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/dataflows": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "objectId": {
+                        "type": "string",
+                        "description": "objectId"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      },
+                      "configuredBy": {
+                        "type": "string",
+                        "description": "configuredBy"
+                      },
+                      "modelUrl": {
+                        "type": "string",
+                        "description": "modelUrl"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Dataflows In Workspace",
+        "description": "Get Dataflows In Workspace",
+        "operationId": "GetDataflowsInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/imports": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "importState": {
+                        "type": "string",
+                        "description": "importState"
+                      },
+                      "createdDateTime": {
+                        "type": "string",
+                        "description": "createdDateTime"
+                      },
+                      "updatedDateTime": {
+                        "type": "string",
+                        "description": "updatedDateTime"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "connectionType": {
+                        "type": "string",
+                        "description": "connectionType"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "source"
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "targetStorageMode": {
+                              "type": "string",
+                              "description": "targetStorageMode"
+                            },
+                            "upstreamDatasets": {
+                              "type": "array",
+                              "items": {},
+                              "description": "upstreamDatasets"
+                            },
+                            "schemaMayNotBeUpToDate": {
+                              "type": "boolean",
+                              "description": "schemaMayNotBeUpToDate"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "datasets"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "reportType": {
+                              "type": "string",
+                              "description": "reportType"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "embedUrl": {
+                              "type": "string",
+                              "description": "embedUrl"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            },
+                            "subscriptions": {
+                              "type": "array",
+                              "items": {},
+                              "description": "subscriptions"
+                            }
+                          }
+                        },
+                        "description": "reports"
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {},
+                        "description": "dataflows"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Imports In Workspace",
+        "description": "Get Imports In Workspace",
+        "operationId": "GetImportsInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Import PBIX To Workspace",
+        "operationId": "ImportPbixToWorkspace",
+        "description": "Import PBIX To Workspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "datasetDisplayName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "nameConflict",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skipReport",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "overrideReportLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "overrideModelLabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "multipart/form-data"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/AssignToCapacity": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Assign Workspace To Capacity",
+        "operationId": "AssignWorkspaceToCapacity",
+        "description": "Assign Workspace To Capacity",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "capacityId": {
+                  "type": "string",
+                  "description": "capacityId"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/capacities": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "admins": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "admins"
+                      },
+                      "sku": {
+                        "type": "string",
+                        "description": "sku"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "state"
+                      },
+                      "capacityUserAccessRight": {
+                        "type": "string",
+                        "description": "capacityUserAccessRight"
+                      },
+                      "region": {
+                        "type": "string",
+                        "description": "region"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Capacities",
+        "description": "Get Capacities",
+        "operationId": "GetCapacities",
+        "parameters": []
+      }
+    },
+    "/groups/{WorkspaceId}/users": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "emailAddress": {
+                        "type": "string",
+                        "description": "emailAddress"
+                      },
+                      "groupUserAccessRight": {
+                        "type": "string",
+                        "description": "groupUserAccessRight"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "identifier"
+                      },
+                      "principalType": {
+                        "type": "string",
+                        "description": "principalType"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Workspace Users",
+        "operationId": "GetWorkspaceUsers",
+        "description": "Get Workspace Users",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Add Workspace User",
+        "description": "Add Workspace User",
+        "operationId": "AddWorkspaceUser",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "identifier": {
+                  "type": "string",
+                  "description": "identifier"
+                },
+                "emailAddress": {
+                  "type": "string",
+                  "description": "identifier"
+                },
+                "groupUserAccessRight": {
+                  "type": "string",
+                  "description": "groupUserAccessRight"
+                },
+                "principalType": {
+                  "type": "string",
+                  "description": "principalType"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/groups/{Workspaced}/datasets/{DatasetId}/datasources": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceType": {
+                        "type": "string",
+                        "description": "datasourceType"
+                      },
+                      "datasourceId": {
+                        "type": "string",
+                        "description": "datasourceId"
+                      },
+                      "gatewayId": {
+                        "type": "string",
+                        "description": "gatewayId"
+                      },
+                      "connectionDetails": {
+                        "type": "object",
+                        "properties": {
+                          "server": {
+                            "type": "string",
+                            "description": "server"
+                          },
+                          "database": {
+                            "type": "string",
+                            "description": "database"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "url"
+                          },
+                          "sharePointSiteUrl": {
+                            "type": "string",
+                            "description": "sharePointSiteUrl"
+                          }
+                        },
+                        "description": "connectionDetails"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Datasources In Workspace",
+        "description": "Get Datasources In Workspace",
+        "operationId": "GetDatasourcesInWorkspace",
+        "parameters": [
+          {
+            "name": "Workspaced",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DatasetId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/datasets/{DatasetId}/refreshes": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "refreshType": {
+                        "type": "string",
+                        "description": "refreshType"
+                      },
+                      "startTime": {
+                        "type": "string",
+                        "description": "startTime"
+                      },
+                      "endTime": {
+                        "type": "string",
+                        "description": "endTime"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "status"
+                      },
+                      "requestId": {
+                        "type": "string",
+                        "description": "requestId"
+                      },
+                      "serviceExceptionJson": {
+                        "type": "string",
+                        "description": "serviceExceptionJson"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Refresh History In Workspace",
+        "description": "Get Refresh History In Workspace",
+        "operationId": "GetRefreshHistoryInWorkspace",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DatasetId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.windows.net/common/oauth2/authorize",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {}
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": []
+    }
+  ],
+  "tags": []
+}

@@ -1,1 +1,303 @@
-{"properties":{"connectionReferences":{},"definition":{"$schema":"https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#","contentVersion":"1.0.0.0","parameters":{"$authentication":{"defaultValue":{},"type":"SecureObject"}},"triggers":{"manual":{"metadata":{"operationMetadataId":"3847265f-3922-40ee-a053-062ea21d8375"},"type":"Request","kind":"PowerApp","inputs":{"schema":{"type":"object","properties":{},"required":[]}}}},"actions":{"Run_a_Child_Flow":{"runAfter":{},"metadata":{"operationMetadataId":"c5d6f07c-9cfe-4fcd-ab0f-dad5ae307afc"},"type":"Workflow","inputs":{"host":{"workflowReferenceName":"176041b8-1f52-ec11-8c62-00224806ee25"}}},"access_token":{"runAfter":{"Run_a_Child_Flow":["Succeeded"]},"metadata":{"operationMetadataId":"ce032c60-9b89-48cf-8aa2-51c5b9527fe9"},"type":"Compose","inputs":"@body('Run_a_Child_Flow')?['access_token']"},"GetGroupsAsAdmin":{"runAfter":{"access_token":["Succeeded"]},"metadata":{"operationMetadataId":"9be297de-c2b9-4658-a3da-c038ebb2bd8d"},"type":"Http","inputs":{"method":"GET","uri":"https://api.powerbi.com/v1.0/myorg/admin/groups","headers":{"Authorization":"Bearer @{outputs('access_token')}"},"queries":{"$expand":"users, reports, dashboards, datasets, dataflows, workbooks","$top":"100","$filter":"state eq 'Active' and type eq 'Workspace'"}}},"Response":{"runAfter":{"GetGroupsAsAdmin":["Succeeded"]},"metadata":{"operationMetadataId":"e7965cbb-2d3b-4aca-9cd4-3265c7af8cbd"},"type":"Response","kind":"Http","inputs":{"statusCode":200,"body":"@body('GetGroupsAsAdmin')","schema":{"type":"object","properties":{"odata.context":{},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"isReadOnly":{"type":"boolean"},"isOnDedicatedCapacity":{"type":"boolean"},"capacityId":{"type":"string"},"dataflowStorageId":{},"description":{},"type":{"type":"string"},"state":{"type":"string"},"users":{"type":"array","items":{"type":"object","properties":{"groupUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{},"principalType":{"type":"string"}}}},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"datasetId":{"type":"string"},"appId":{},"description":{},"reportType":{"type":"string"},"webUrl":{},"embedUrl":{},"createdBy":{},"modifiedBy":{},"createdDateTime":{"type":"string"},"modifiedDateTime":{"type":"string"},"users":{"type":"array"},"subscriptions":{"type":"array"}}}},"dashboards":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"displayName":{"type":"string"},"isReadOnly":{"type":"boolean"},"appId":{},"webUrl":{},"embedUrl":{},"tiles":{},"users":{"type":"array"},"subscriptions":{"type":"array"}}}},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"configuredBy":{"type":"string"},"CreatedDate":{"type":"string"},"ContentProviderType":{"type":"string"},"description":{},"upstreamDataflows":{},"CreateReportEmbedURL":{},"QnaEmbedURL":{},"webUrl":{},"IsEffectiveIdentityRequired":{"type":"boolean"},"IsEffectiveIdentityRolesRequired":{"type":"boolean"},"IsOnPremGatewayRequired":{},"Encryption":{},"users":{"type":"array"},"addRowsAPIEnabled":{"type":"boolean"},"IsRefreshable":{"type":"boolean"},"targetStorageMode":{"type":"string"}}}},"dataflows":{"type":"array","items":{"type":"object","properties":{"objectId":{"type":"string"},"name":{"type":"string"},"description":{"type":"string"},"modelUrl":{},"configuredBy":{"type":"string"},"modifiedBy":{},"modifiedDateTime":{},"users":{"type":"array"},"workspaceId":{}}}},"workbooks":{},"pipelineId":{"type":"string"}}}}}}}}},"outputs":{}}},"schemaVersion":"1.0.0.0"}
+{
+  "properties": {
+    "connectionReferences": {},
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "3847265f-3922-40ee-a053-062ea21d8375"
+          },
+          "type": "Request",
+          "kind": "PowerApp",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "c5d6f07c-9cfe-4fcd-ab0f-dad5ae307afc"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "176041b8-1f52-ec11-8c62-00224806ee25"
+            }
+          }
+        },
+        "access_token": {
+          "runAfter": {
+            "Run_a_Child_Flow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ce032c60-9b89-48cf-8aa2-51c5b9527fe9"
+          },
+          "type": "Compose",
+          "inputs": "@body('Run_a_Child_Flow')?['access_token']"
+        },
+        "GetGroupsAsAdmin": {
+          "runAfter": {
+            "access_token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9be297de-c2b9-4658-a3da-c038ebb2bd8d"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "https://api.powerbi.com/v1.0/myorg/admin/groups",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}"
+            },
+            "queries": {
+              "$expand": "users, reports, dashboards, datasets, dataflows, workbooks",
+              "$top": "100",
+              "$filter": "state eq 'Active' and type eq 'Workspace'"
+            }
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "GetGroupsAsAdmin": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e7965cbb-2d3b-4aca-9cd4-3265c7af8cbd"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@body('GetGroupsAsAdmin')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "odata.context": {},
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "isReadOnly": {
+                        "type": "boolean"
+                      },
+                      "isOnDedicatedCapacity": {
+                        "type": "boolean"
+                      },
+                      "capacityId": {
+                        "type": "string"
+                      },
+                      "dataflowStorageId": {},
+                      "description": {},
+                      "type": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "groupUserAccessRight": {
+                              "type": "string"
+                            },
+                            "emailAddress": {
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "type": "string"
+                            },
+                            "identifier": {
+                              "type": "string"
+                            },
+                            "graphId": {},
+                            "principalType": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "datasetId": {
+                              "type": "string"
+                            },
+                            "appId": {},
+                            "description": {},
+                            "reportType": {
+                              "type": "string"
+                            },
+                            "webUrl": {},
+                            "embedUrl": {},
+                            "createdBy": {},
+                            "modifiedBy": {},
+                            "createdDateTime": {
+                              "type": "string"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string"
+                            },
+                            "users": {
+                              "type": "array"
+                            },
+                            "subscriptions": {
+                              "type": "array"
+                            }
+                          }
+                        }
+                      },
+                      "dashboards": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "type": "string"
+                            },
+                            "isReadOnly": {
+                              "type": "boolean"
+                            },
+                            "appId": {},
+                            "webUrl": {},
+                            "embedUrl": {},
+                            "tiles": {},
+                            "users": {
+                              "type": "array"
+                            },
+                            "subscriptions": {
+                              "type": "array"
+                            }
+                          }
+                        }
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "configuredBy": {
+                              "type": "string"
+                            },
+                            "CreatedDate": {
+                              "type": "string"
+                            },
+                            "ContentProviderType": {
+                              "type": "string"
+                            },
+                            "description": {},
+                            "upstreamDataflows": {},
+                            "CreateReportEmbedURL": {},
+                            "QnaEmbedURL": {},
+                            "webUrl": {},
+                            "IsEffectiveIdentityRequired": {
+                              "type": "boolean"
+                            },
+                            "IsEffectiveIdentityRolesRequired": {
+                              "type": "boolean"
+                            },
+                            "IsOnPremGatewayRequired": {},
+                            "Encryption": {},
+                            "users": {
+                              "type": "array"
+                            },
+                            "addRowsAPIEnabled": {
+                              "type": "boolean"
+                            },
+                            "IsRefreshable": {
+                              "type": "boolean"
+                            },
+                            "targetStorageMode": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "objectId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "modelUrl": {},
+                            "configuredBy": {
+                              "type": "string"
+                            },
+                            "modifiedBy": {},
+                            "modifiedDateTime": {},
+                            "users": {
+                              "type": "array"
+                            },
+                            "workspaceId": {}
+                          }
+                        }
+                      },
+                      "workbooks": {},
+                      "pipelineId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "outputs": {}
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

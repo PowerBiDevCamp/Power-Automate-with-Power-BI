@@ -1,1 +1,1886 @@
-{"swagger":"2.0","info":{"title":"Default title","description":"A sample custom connector which enables for building Canvas Apps and Flows which call the Power BI Admin APIs.","version":"1.0"},"host":"api.powerbi.com","basePath":"/v1.0/myorg/","schemes":["https"],"consumes":[],"produces":[],"paths":{"/admin/groups":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context","title":"odata.context"},"@odata.count":{"type":"integer","format":"int32","description":"@odata.count","title":"Count"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"isReadOnly":{"type":"boolean","description":"isReadOnly"},"isOnDedicatedCapacity":{"type":"boolean","description":"isOnDedicatedCapacity"},"capacityId":{"type":"string","description":"capacityId"},"capacityMigrationStatus":{"type":"string","description":"capacityMigrationStatus"},"type":{"type":"string","description":"type"},"state":{"type":"string","description":"state"},"name":{"type":"string","description":"name"},"users":{"type":"array","items":{"type":"object","properties":{"emailAddress":{"type":"string","description":"emailAddress"},"groupUserAccessRight":{"type":"string","description":"groupUserAccessRight"},"displayName":{"type":"string","description":"displayName"},"identifier":{"type":"string","description":"identifier"},"principalType":{"type":"string","description":"principalType"}}},"description":"users"},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"reportType":{"type":"string","description":"reportType"},"name":{"type":"string","description":"name"},"datasetId":{"type":"string","description":"datasetId"},"createdDateTime":{"type":"string","description":"createdDateTime"},"modifiedDateTime":{"type":"string","description":"modifiedDateTime"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"},"appId":{"type":"string","description":"appId"}}},"description":"reports"},"dashboards":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"displayName":{"type":"string","description":"displayName"},"isReadOnly":{"type":"boolean","description":"isReadOnly"},"users":{"type":"array","items":{},"description":"users"}}},"description":"dashboards"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"addRowsAPIEnabled":{"type":"boolean","description":"addRowsAPIEnabled"},"configuredBy":{"type":"string","description":"configuredBy"},"isRefreshable":{"type":"boolean","description":"isRefreshable"},"isEffectiveIdentityRequired":{"type":"boolean","description":"isEffectiveIdentityRequired"},"isEffectiveIdentityRolesRequired":{"type":"boolean","description":"isEffectiveIdentityRolesRequired"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"createdDate":{"type":"string","description":"createdDate"},"contentProviderType":{"type":"string","description":"contentProviderType"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}},"description":"datasets"},"dataflows":{"type":"array","items":{"type":"object","properties":{"objectId":{"type":"string","description":"objectId"},"name":{"type":"string","description":"name"},"description":{"type":"string","description":"description"},"configuredBy":{"type":"string","description":"configuredBy"},"users":{"type":"array","items":{},"description":"users"}}},"description":"dataflows"},"pipelineId":{"type":"string","description":"pipelineId"}}},"description":"value"}}}}},"summary":"Get Workspaces As Admin","description":"Get Workspaces As Admin","operationId":"GetWorkspacesAsAdmin","parameters":[{"name":"$expand","in":"query","required":false,"type":"string"},{"name":"$filter","in":"query","required":false,"type":"string"},{"name":"$top","in":"query","required":false,"type":"integer","default":100}]}},"/admin/activityevents":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"activityEventEntities":{"type":"array","items":{"type":"object","properties":{"Id":{"type":"string","description":"Id"},"RecordType":{"type":"integer","format":"int32","description":"RecordType"},"CreationTime":{"type":"string","description":"CreationTime"},"Operation":{"type":"string","description":"Operation"},"OrganizationId":{"type":"string","description":"OrganizationId"},"UserType":{"type":"integer","format":"int32","description":"UserType"},"UserKey":{"type":"string","description":"UserKey"},"Workload":{"type":"string","description":"Workload"},"UserId":{"type":"string","description":"UserId"},"ClientIP":{"type":"string","description":"ClientIP"},"UserAgent":{"type":"string","description":"UserAgent"},"Activity":{"type":"string","description":"Activity"},"ItemName":{"type":"string","description":"ItemName"},"WorkSpaceName":{"type":"string","description":"WorkSpaceName"},"DatasetName":{"type":"string","description":"DatasetName"},"CapacityId":{"type":"string","description":"CapacityId"},"CapacityName":{"type":"string","description":"CapacityName"},"WorkspaceId":{"type":"string","description":"WorkspaceId"},"ObjectId":{"type":"string","description":"ObjectId"},"DatasetId":{"type":"string","description":"DatasetId"},"DataConnectivityMode":{"type":"string","description":"DataConnectivityMode"},"IsSuccess":{"type":"boolean","description":"IsSuccess"},"RequestId":{"type":"string","description":"RequestId"},"ActivityId":{"type":"string","description":"ActivityId"},"LastRefreshTime":{"type":"string","description":"LastRefreshTime"},"AggregatedWorkspaceInformation":{"type":"object","properties":{"WorkspaceCount":{"type":"integer","format":"int32","description":"WorkspaceCount"},"WorkspacesByCapacitySku":{"type":"string","description":"WorkspacesByCapacitySku"},"WorkspacesByType":{"type":"string","description":"WorkspacesByType"}},"description":"AggregatedWorkspaceInformation"},"ReportName":{"type":"string","description":"ReportName"},"ReportId":{"type":"string","description":"ReportId"},"ReportType":{"type":"string","description":"ReportType"},"DistributionMethod":{"type":"string","description":"DistributionMethod"},"ConsumptionMethod":{"type":"string","description":"ConsumptionMethod"},"GatewayId":{"type":"string","description":"GatewayId"},"DatasourceId":{"type":"string","description":"DatasourceId"},"ModelsSnapshots":{"type":"array","items":{"type":"integer","format":"int32"},"description":"ModelsSnapshots"},"RefreshType":{"type":"string","description":"RefreshType"},"ImportId":{"type":"string","description":"ImportId"},"ImportSource":{"type":"string","description":"ImportSource"},"ImportType":{"type":"string","description":"ImportType"},"ImportDisplayName":{"type":"string","description":"ImportDisplayName"}}},"description":"activityEventEntities"},"continuationUri":{"type":"string","description":"continuationUri"},"continuationToken":{"type":"string","description":"continuationToken"},"lastResultSet":{"type":"boolean","description":"lastResultSet"}}}}},"summary":"Get Activity Events","description":"Get Activity Events","operationId":"GetActivityEvents","parameters":[{"name":"startDateTime","in":"query","required":false,"type":"string","default":"2021-10-28T00:00:00Z"},{"name":"endDateTime","in":"query","required":false,"type":"string","default":"2021-10-28T23:59:59Z"},{"name":"continuationToken","in":"query","required":false,"type":"string"}]}},"/admin/capacities":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"displayName":{"type":"string","description":"displayName"},"admins":{"type":"array","items":{"type":"string"},"description":"admins"},"sku":{"type":"string","description":"sku"},"state":{"type":"string","description":"state"},"capacityUserAccessRight":{"type":"string","description":"capacityUserAccessRight"},"region":{"type":"string","description":"region"},"users":{"type":"array","items":{},"description":"users"}}},"description":"value"}}}}},"summary":"Get Capacities As Admin","description":"Get Capacities As Admin","operationId":"GetCapacitiesAsAdmin","parameters":[]}},"/admin/pipelines":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"displayName":{"type":"string","description":"displayName"},"description":{"type":"string","description":"description"}}},"description":"value"}}}}},"summary":"Get Pipelines As Admin","description":"Get Pipelines As Admin","operationId":"GetPipelinesAsAdmin","parameters":[]}},"/admin/imports":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.count":{"type":"integer","format":"int32","description":"@odata.count"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"importState":{"type":"string","description":"importState"},"createdDateTime":{"type":"string","description":"createdDateTime"},"updatedDateTime":{"type":"string","description":"updatedDateTime"},"name":{"type":"string","description":"name"},"connectionType":{"type":"string","description":"connectionType"},"source":{"type":"string","description":"source"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}},"description":"datasets"},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"reportType":{"type":"string","description":"reportType"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"}}},"description":"reports"},"dataflows":{"type":"array","items":{},"description":"dataflows"}}},"description":"value"}}}}},"summary":"Get Imports As Admin","description":"Get Imports As Admin","operationId":"GetImportsAsAdmin","parameters":[{"name":"$expand","in":"query","required":false,"type":"string"},{"name":"$filter","in":"query","required":false,"type":"string"},{"name":"$top","in":"query","required":false,"type":"string"},{"name":"$skip","in":"query","required":false,"type":"string"}]}},"/groups/{WorkspaceId}/imports":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"importState":{"type":"string","description":"importState"},"createdDateTime":{"type":"string","description":"createdDateTime"},"updatedDateTime":{"type":"string","description":"updatedDateTime"},"name":{"type":"string","description":"name"},"connectionType":{"type":"string","description":"connectionType"},"source":{"type":"string","description":"source"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"upstreamDatasets":{"type":"array","items":{},"description":"upstreamDatasets"},"schemaMayNotBeUpToDate":{"type":"boolean","description":"schemaMayNotBeUpToDate"},"users":{"type":"array","items":{},"description":"users"}}},"description":"datasets"},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"reportType":{"type":"string","description":"reportType"},"name":{"type":"string","description":"name"},"webUrl":{"type":"string","description":"webUrl"},"embedUrl":{"type":"string","description":"embedUrl"},"users":{"type":"array","items":{},"description":"users"},"subscriptions":{"type":"array","items":{},"description":"subscriptions"}}},"description":"reports"},"dataflows":{"type":"array","items":{},"description":"dataflows"}}},"description":"value"}}}}},"summary":"Get Imports In Group","description":"Get Imports In Group","operationId":"GetImportsInGroup","parameters":[{"name":"WorkspaceId","in":"path","required":true,"type":"string"}]}},"/admin/apps":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"lastUpdate":{"type":"string","description":"lastUpdate"},"description":{"type":"string","description":"description"},"publishedBy":{"type":"string","description":"publishedBy"},"users":{"type":"array","items":{},"description":"users"}}},"description":"value"}}}}},"summary":"Get Apps As Admin","description":"Get Apps As Admin","operationId":"GetAppsAsAdmin","parameters":[{"name":"$top","in":"query","required":false,"type":"integer","default":100}]}},"/gateways":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"gatewayId":{"type":"integer","format":"int32","description":"gatewayId"},"name":{"type":"string","description":"name"},"type":{"type":"string","description":"type"},"publicKey":{"type":"object","properties":{"exponent":{"type":"string","description":"exponent"},"modulus":{"type":"string","description":"modulus"}},"description":"publicKey"},"gatewayAnnotation":{"type":"object","properties":{"gatewayContactInformation":{"type":"array","items":{"type":"string"},"description":"gatewayContactInformation"},"gatewayVersion":{"type":"string","description":"gatewayVersion"},"gatewayWitnessString":{"type":"object","properties":{"EncryptedResult":{"type":"string","description":"EncryptedResult"},"IV":{"type":"string","description":"IV"},"Signature":{"type":"string","description":"Signature"}},"description":"gatewayWitnessString"},"gatewayMachine":{"type":"string","description":"gatewayMachine"},"gatewaySalt":{"type":"string","description":"gatewaySalt"},"gatewayWitnessStringLegacy":{"type":"string","description":"gatewayWitnessStringLegacy"},"gatewaySaltLegacy":{"type":"string","description":"gatewaySaltLegacy"},"gatewayDepartment":{"type":"string","description":"gatewayDepartment"},"gatewayVirtualNetworkSubnetId":{"type":"string","description":"gatewayVirtualNetworkSubnetId"}},"description":"gatewayAnnotation"}}},"description":"value"}}}}},"summary":"Get Gateways","description":"Get Gateways","operationId":"GetGateways","parameters":[]}},"/admin/capacities/refreshables":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"@odata.context":{"type":"string","description":"@odata.context"},"@odata.count":{"type":"integer","format":"int32","description":"@odata.count"},"value":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"kind":{"type":"string","description":"kind"},"lastRefresh":{"type":"object","properties":{"id":{"type":"integer","format":"int32","description":"id"},"refreshType":{"type":"string","description":"refreshType"},"startTime":{"type":"string","description":"startTime"},"endTime":{"type":"string","description":"endTime"},"serviceExceptionJson":{"type":"string","description":"serviceExceptionJson"},"status":{"type":"string","description":"status"},"requestId":{"type":"string","description":"requestId"},"extendedStatus":{"type":"string","description":"extendedStatus"}},"description":"lastRefresh"},"refreshSchedule":{"type":"object","properties":{"days":{"type":"array","items":{"type":"string"},"description":"days"},"times":{"type":"array","items":{},"description":"times"},"enabled":{"type":"boolean","description":"enabled"},"localTimeZoneId":{"type":"string","description":"localTimeZoneId"},"notifyOption":{"type":"string","description":"notifyOption"}},"description":"refreshSchedule"},"configuredBy":{"type":"array","items":{"type":"string"},"description":"configuredBy"}}},"description":"value"}}}}},"summary":"Get Refreshables As Admin","description":"Get Refreshables As Admin","operationId":"GetRefreshablesAsAdmin","parameters":[{"name":"$top","in":"query","required":false,"type":"integer","default":250}]}},"/admin/workspaces/getInfo":{"post":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"id":{"type":"string","description":"id"},"createdDateTime":{"type":"string","description":"createdDateTime"},"status":{"type":"string","description":"status"}}}}},"summary":"Post Workspace Info","operationId":"PostWorkspaceInfo","description":"Post Workspace Info","parameters":[{"name":"lineage","in":"query","required":false,"type":"boolean"},{"name":"datasourceDetails","in":"query","required":false,"type":"boolean"},{"name":"datasetSchema","in":"query","required":false,"type":"boolean"},{"name":"datasetExpressions","in":"query","required":false,"type":"boolean"},{"name":"getArtifactUsers","in":"query","required":false,"type":"boolean"},{"name":"Content-Type","in":"header","required":true,"type":"string","default":"application/json","x-ms-visibility":"internal"},{"name":"Accept","in":"header","required":true,"type":"string","default":"application/json","x-ms-visibility":"internal"},{"in":"body","name":"workspaces","required":true,"schema":{"type":"object"}}]}},"/admin/workspaces/scanStatus/{ScanId}":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"id":{"type":"string","description":"id"},"createdDateTime":{"type":"string","description":"createdDateTime"},"status":{"type":"string","description":"status"}}}}},"summary":"Get Scan Status","operationId":"GetScanStatus","description":"Get Scan Status","parameters":[{"name":"ScanId","in":"path","required":true,"type":"string"}]}},"/admin/workspaces/scanResult/{ScanId}":{"get":{"responses":{"default":{"description":"default","schema":{"type":"object","properties":{"workspaces":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"type":{"type":"string","description":"type"},"state":{"type":"string","description":"state"},"isOnDedicatedCapacity":{"type":"boolean","description":"isOnDedicatedCapacity"},"capacityId":{"type":"string","description":"capacityId"},"reports":{"type":"array","items":{"type":"object","properties":{"reportType":{"type":"string","description":"reportType"},"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"datasetId":{"type":"string","description":"datasetId"},"createdDateTime":{"type":"string","description":"createdDateTime"},"modifiedDateTime":{"type":"string","description":"modifiedDateTime"},"modifiedBy":{"type":"string","description":"modifiedBy"},"createdBy":{"type":"string","description":"createdBy"},"modifiedById":{"type":"string","description":"modifiedById"},"createdById":{"type":"string","description":"createdById"},"users":{"type":"array","items":{"type":"object","properties":{"reportUserAccessRight":{"type":"string","description":"reportUserAccessRight"},"emailAddress":{"type":"string","description":"emailAddress"},"displayName":{"type":"string","description":"displayName"},"identifier":{"type":"string","description":"identifier"},"graphId":{"type":"string","description":"graphId"},"principalType":{"type":"string","description":"principalType"}}},"description":"users"},"appId":{"type":"string","description":"appId"}}},"description":"reports"},"dashboards":{"type":"array","items":{},"description":"dashboards"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"id"},"name":{"type":"string","description":"name"},"tables":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"name"},"columns":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"name"},"dataType":{"type":"string","description":"dataType"},"isHidden":{"type":"boolean","description":"isHidden"},"columnType":{"type":"string","description":"columnType"},"expression":{"type":"string","description":"expression"}}},"description":"columns"},"measures":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"name"},"expression":{"type":"string","description":"expression"},"isHidden":{"type":"boolean","description":"isHidden"}}},"description":"measures"},"isHidden":{"type":"boolean","description":"isHidden"},"source":{"type":"array","items":{"type":"object","properties":{"expression":{"type":"string","description":"expression"}}},"description":"source"}}},"description":"tables"},"configuredBy":{"type":"string","description":"configuredBy"},"targetStorageMode":{"type":"string","description":"targetStorageMode"},"createdDate":{"type":"string","description":"createdDate"},"contentProviderType":{"type":"string","description":"contentProviderType"},"datasourceUsages":{"type":"array","items":{"type":"object","properties":{"datasourceInstanceId":{"type":"string","description":"datasourceInstanceId"}}},"description":"datasourceUsages"},"users":{"type":"array","items":{"type":"object","properties":{"datasetUserAccessRight":{"type":"string","description":"datasetUserAccessRight"},"emailAddress":{"type":"string","description":"emailAddress"},"displayName":{"type":"string","description":"displayName"},"identifier":{"type":"string","description":"identifier"},"graphId":{"type":"string","description":"graphId"},"principalType":{"type":"string","description":"principalType"}}},"description":"users"}}},"description":"datasets"},"dataflows":{"type":"array","items":{"type":"object","properties":{"objectId":{"type":"string","description":"objectId"},"name":{"type":"string","description":"name"},"description":{"type":"string","description":"description"},"configuredBy":{"type":"string","description":"configuredBy"},"modifiedBy":{"type":"string","description":"modifiedBy"},"modifiedDateTime":{"type":"string","description":"modifiedDateTime"},"datasourceUsages":{"type":"array","items":{"type":"object","properties":{"datasourceInstanceId":{"type":"string","description":"datasourceInstanceId"}}},"description":"datasourceUsages"},"users":{"type":"array","items":{"type":"object","properties":{"dataflowUserAccessRight":{"type":"string","description":"dataflowUserAccessRight"},"emailAddress":{"type":"string","description":"emailAddress"},"displayName":{"type":"string","description":"displayName"},"identifier":{"type":"string","description":"identifier"},"graphId":{"type":"string","description":"graphId"},"principalType":{"type":"string","description":"principalType"}}},"description":"users"}}},"description":"dataflows"},"users":{"type":"array","items":{"type":"object","properties":{"groupUserAccessRight":{"type":"string","description":"groupUserAccessRight"},"emailAddress":{"type":"string","description":"emailAddress"},"displayName":{"type":"string","description":"displayName"},"identifier":{"type":"string","description":"identifier"},"graphId":{"type":"string","description":"graphId"},"principalType":{"type":"string","description":"principalType"}}},"description":"users"}}},"description":"workspaces"},"datasourceInstances":{"type":"array","items":{"type":"object","properties":{"datasourceType":{"type":"string","description":"datasourceType"},"connectionDetails":{"type":"object","properties":{"server":{"type":"string","description":"server"},"database":{"type":"string","description":"database"}},"description":"connectionDetails"},"datasourceId":{"type":"string","description":"datasourceId"},"gatewayId":{"type":"string","description":"gatewayId"}}},"description":"datasourceInstances"}}}}},"summary":"Get Scan Result","operationId":"GetScanResult","description":"Get Scan Result","parameters":[{"name":"ScanId","in":"path","required":true,"type":"string"}]}}},"definitions":{},"parameters":{},"responses":{},"securityDefinitions":{"oauth2_auth":{"type":"oauth2","flow":"accessCode","authorizationUrl":"https://login.windows.net/common/oauth2/authorize","tokenUrl":"https://login.windows.net/common/oauth2/authorize","scopes":{"Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All":"Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All"}}},"security":[{"oauth2_auth":["Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All"]}],"tags":[]}
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Default title",
+    "description": "A sample custom connector which enables for building Canvas Apps and Flows which call the Power BI Admin APIs.",
+    "version": "1.0"
+  },
+  "host": "api.powerbi.com",
+  "basePath": "/v1.0/myorg/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/admin/groups": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context",
+                  "title": "odata.context"
+                },
+                "@odata.count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "@odata.count",
+                  "title": "Count"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "isReadOnly": {
+                        "type": "boolean",
+                        "description": "isReadOnly"
+                      },
+                      "isOnDedicatedCapacity": {
+                        "type": "boolean",
+                        "description": "isOnDedicatedCapacity"
+                      },
+                      "capacityId": {
+                        "type": "string",
+                        "description": "capacityId"
+                      },
+                      "capacityMigrationStatus": {
+                        "type": "string",
+                        "description": "capacityMigrationStatus"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "state"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "emailAddress": {
+                              "type": "string",
+                              "description": "emailAddress"
+                            },
+                            "groupUserAccessRight": {
+                              "type": "string",
+                              "description": "groupUserAccessRight"
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "description": "displayName"
+                            },
+                            "identifier": {
+                              "type": "string",
+                              "description": "identifier"
+                            },
+                            "principalType": {
+                              "type": "string",
+                              "description": "principalType"
+                            }
+                          }
+                        },
+                        "description": "users"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "reportType": {
+                              "type": "string",
+                              "description": "reportType"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "datasetId": {
+                              "type": "string",
+                              "description": "datasetId"
+                            },
+                            "createdDateTime": {
+                              "type": "string",
+                              "description": "createdDateTime"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string",
+                              "description": "modifiedDateTime"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            },
+                            "subscriptions": {
+                              "type": "array",
+                              "items": {},
+                              "description": "subscriptions"
+                            },
+                            "appId": {
+                              "type": "string",
+                              "description": "appId"
+                            }
+                          }
+                        },
+                        "description": "reports"
+                      },
+                      "dashboards": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "description": "displayName"
+                            },
+                            "isReadOnly": {
+                              "type": "boolean",
+                              "description": "isReadOnly"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "dashboards"
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "addRowsAPIEnabled": {
+                              "type": "boolean",
+                              "description": "addRowsAPIEnabled"
+                            },
+                            "configuredBy": {
+                              "type": "string",
+                              "description": "configuredBy"
+                            },
+                            "isRefreshable": {
+                              "type": "boolean",
+                              "description": "isRefreshable"
+                            },
+                            "isEffectiveIdentityRequired": {
+                              "type": "boolean",
+                              "description": "isEffectiveIdentityRequired"
+                            },
+                            "isEffectiveIdentityRolesRequired": {
+                              "type": "boolean",
+                              "description": "isEffectiveIdentityRolesRequired"
+                            },
+                            "targetStorageMode": {
+                              "type": "string",
+                              "description": "targetStorageMode"
+                            },
+                            "createdDate": {
+                              "type": "string",
+                              "description": "createdDate"
+                            },
+                            "contentProviderType": {
+                              "type": "string",
+                              "description": "contentProviderType"
+                            },
+                            "upstreamDatasets": {
+                              "type": "array",
+                              "items": {},
+                              "description": "upstreamDatasets"
+                            },
+                            "schemaMayNotBeUpToDate": {
+                              "type": "boolean",
+                              "description": "schemaMayNotBeUpToDate"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "datasets"
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "objectId": {
+                              "type": "string",
+                              "description": "objectId"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "description"
+                            },
+                            "configuredBy": {
+                              "type": "string",
+                              "description": "configuredBy"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "dataflows"
+                      },
+                      "pipelineId": {
+                        "type": "string",
+                        "description": "pipelineId"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Workspaces As Admin",
+        "description": "Get Workspaces As Admin",
+        "operationId": "GetWorkspacesAsAdmin",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ]
+      }
+    },
+    "/admin/activityevents": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activityEventEntities": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Id": {
+                        "type": "string",
+                        "description": "Id"
+                      },
+                      "RecordType": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "RecordType"
+                      },
+                      "CreationTime": {
+                        "type": "string",
+                        "description": "CreationTime"
+                      },
+                      "Operation": {
+                        "type": "string",
+                        "description": "Operation"
+                      },
+                      "OrganizationId": {
+                        "type": "string",
+                        "description": "OrganizationId"
+                      },
+                      "UserType": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "UserType"
+                      },
+                      "UserKey": {
+                        "type": "string",
+                        "description": "UserKey"
+                      },
+                      "Workload": {
+                        "type": "string",
+                        "description": "Workload"
+                      },
+                      "UserId": {
+                        "type": "string",
+                        "description": "UserId"
+                      },
+                      "ClientIP": {
+                        "type": "string",
+                        "description": "ClientIP"
+                      },
+                      "UserAgent": {
+                        "type": "string",
+                        "description": "UserAgent"
+                      },
+                      "Activity": {
+                        "type": "string",
+                        "description": "Activity"
+                      },
+                      "ItemName": {
+                        "type": "string",
+                        "description": "ItemName"
+                      },
+                      "WorkSpaceName": {
+                        "type": "string",
+                        "description": "WorkSpaceName"
+                      },
+                      "DatasetName": {
+                        "type": "string",
+                        "description": "DatasetName"
+                      },
+                      "CapacityId": {
+                        "type": "string",
+                        "description": "CapacityId"
+                      },
+                      "CapacityName": {
+                        "type": "string",
+                        "description": "CapacityName"
+                      },
+                      "WorkspaceId": {
+                        "type": "string",
+                        "description": "WorkspaceId"
+                      },
+                      "ObjectId": {
+                        "type": "string",
+                        "description": "ObjectId"
+                      },
+                      "DatasetId": {
+                        "type": "string",
+                        "description": "DatasetId"
+                      },
+                      "DataConnectivityMode": {
+                        "type": "string",
+                        "description": "DataConnectivityMode"
+                      },
+                      "IsSuccess": {
+                        "type": "boolean",
+                        "description": "IsSuccess"
+                      },
+                      "RequestId": {
+                        "type": "string",
+                        "description": "RequestId"
+                      },
+                      "ActivityId": {
+                        "type": "string",
+                        "description": "ActivityId"
+                      },
+                      "LastRefreshTime": {
+                        "type": "string",
+                        "description": "LastRefreshTime"
+                      },
+                      "AggregatedWorkspaceInformation": {
+                        "type": "object",
+                        "properties": {
+                          "WorkspaceCount": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "WorkspaceCount"
+                          },
+                          "WorkspacesByCapacitySku": {
+                            "type": "string",
+                            "description": "WorkspacesByCapacitySku"
+                          },
+                          "WorkspacesByType": {
+                            "type": "string",
+                            "description": "WorkspacesByType"
+                          }
+                        },
+                        "description": "AggregatedWorkspaceInformation"
+                      },
+                      "ReportName": {
+                        "type": "string",
+                        "description": "ReportName"
+                      },
+                      "ReportId": {
+                        "type": "string",
+                        "description": "ReportId"
+                      },
+                      "ReportType": {
+                        "type": "string",
+                        "description": "ReportType"
+                      },
+                      "DistributionMethod": {
+                        "type": "string",
+                        "description": "DistributionMethod"
+                      },
+                      "ConsumptionMethod": {
+                        "type": "string",
+                        "description": "ConsumptionMethod"
+                      },
+                      "GatewayId": {
+                        "type": "string",
+                        "description": "GatewayId"
+                      },
+                      "DatasourceId": {
+                        "type": "string",
+                        "description": "DatasourceId"
+                      },
+                      "ModelsSnapshots": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "description": "ModelsSnapshots"
+                      },
+                      "RefreshType": {
+                        "type": "string",
+                        "description": "RefreshType"
+                      },
+                      "ImportId": {
+                        "type": "string",
+                        "description": "ImportId"
+                      },
+                      "ImportSource": {
+                        "type": "string",
+                        "description": "ImportSource"
+                      },
+                      "ImportType": {
+                        "type": "string",
+                        "description": "ImportType"
+                      },
+                      "ImportDisplayName": {
+                        "type": "string",
+                        "description": "ImportDisplayName"
+                      }
+                    }
+                  },
+                  "description": "activityEventEntities"
+                },
+                "continuationUri": {
+                  "type": "string",
+                  "description": "continuationUri"
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "continuationToken"
+                },
+                "lastResultSet": {
+                  "type": "boolean",
+                  "description": "lastResultSet"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Activity Events",
+        "description": "Get Activity Events",
+        "operationId": "GetActivityEvents",
+        "parameters": [
+          {
+            "name": "startDateTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2021-10-28T00:00:00Z"
+          },
+          {
+            "name": "endDateTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2021-10-28T23:59:59Z"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/admin/capacities": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "admins": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "admins"
+                      },
+                      "sku": {
+                        "type": "string",
+                        "description": "sku"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "state"
+                      },
+                      "capacityUserAccessRight": {
+                        "type": "string",
+                        "description": "capacityUserAccessRight"
+                      },
+                      "region": {
+                        "type": "string",
+                        "description": "region"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Capacities As Admin",
+        "description": "Get Capacities As Admin",
+        "operationId": "GetCapacitiesAsAdmin",
+        "parameters": []
+      }
+    },
+    "/admin/pipelines": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "displayName"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Pipelines As Admin",
+        "description": "Get Pipelines As Admin",
+        "operationId": "GetPipelinesAsAdmin",
+        "parameters": []
+      }
+    },
+    "/admin/imports": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "@odata.count"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "importState": {
+                        "type": "string",
+                        "description": "importState"
+                      },
+                      "createdDateTime": {
+                        "type": "string",
+                        "description": "createdDateTime"
+                      },
+                      "updatedDateTime": {
+                        "type": "string",
+                        "description": "updatedDateTime"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "connectionType": {
+                        "type": "string",
+                        "description": "connectionType"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "source"
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "targetStorageMode": {
+                              "type": "string",
+                              "description": "targetStorageMode"
+                            },
+                            "upstreamDatasets": {
+                              "type": "array",
+                              "items": {},
+                              "description": "upstreamDatasets"
+                            },
+                            "schemaMayNotBeUpToDate": {
+                              "type": "boolean",
+                              "description": "schemaMayNotBeUpToDate"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "datasets"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "reportType": {
+                              "type": "string",
+                              "description": "reportType"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "embedUrl": {
+                              "type": "string",
+                              "description": "embedUrl"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            },
+                            "subscriptions": {
+                              "type": "array",
+                              "items": {},
+                              "description": "subscriptions"
+                            }
+                          }
+                        },
+                        "description": "reports"
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {},
+                        "description": "dataflows"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Imports As Admin",
+        "description": "Get Imports As Admin",
+        "operationId": "GetImportsAsAdmin",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups/{WorkspaceId}/imports": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "importState": {
+                        "type": "string",
+                        "description": "importState"
+                      },
+                      "createdDateTime": {
+                        "type": "string",
+                        "description": "createdDateTime"
+                      },
+                      "updatedDateTime": {
+                        "type": "string",
+                        "description": "updatedDateTime"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "connectionType": {
+                        "type": "string",
+                        "description": "connectionType"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "source"
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "targetStorageMode": {
+                              "type": "string",
+                              "description": "targetStorageMode"
+                            },
+                            "upstreamDatasets": {
+                              "type": "array",
+                              "items": {},
+                              "description": "upstreamDatasets"
+                            },
+                            "schemaMayNotBeUpToDate": {
+                              "type": "boolean",
+                              "description": "schemaMayNotBeUpToDate"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "datasets"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "reportType": {
+                              "type": "string",
+                              "description": "reportType"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "webUrl": {
+                              "type": "string",
+                              "description": "webUrl"
+                            },
+                            "embedUrl": {
+                              "type": "string",
+                              "description": "embedUrl"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {},
+                              "description": "users"
+                            },
+                            "subscriptions": {
+                              "type": "array",
+                              "items": {},
+                              "description": "subscriptions"
+                            }
+                          }
+                        },
+                        "description": "reports"
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {},
+                        "description": "dataflows"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Imports In Group",
+        "description": "Get Imports In Group",
+        "operationId": "GetImportsInGroup",
+        "parameters": [
+          {
+            "name": "WorkspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/admin/apps": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "lastUpdate": {
+                        "type": "string",
+                        "description": "lastUpdate"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      },
+                      "publishedBy": {
+                        "type": "string",
+                        "description": "publishedBy"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {},
+                        "description": "users"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Apps As Admin",
+        "description": "Get Apps As Admin",
+        "operationId": "GetAppsAsAdmin",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ]
+      }
+    },
+    "/gateways": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "gatewayId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "gatewayId"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "publicKey": {
+                        "type": "object",
+                        "properties": {
+                          "exponent": {
+                            "type": "string",
+                            "description": "exponent"
+                          },
+                          "modulus": {
+                            "type": "string",
+                            "description": "modulus"
+                          }
+                        },
+                        "description": "publicKey"
+                      },
+                      "gatewayAnnotation": {
+                        "type": "object",
+                        "properties": {
+                          "gatewayContactInformation": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "gatewayContactInformation"
+                          },
+                          "gatewayVersion": {
+                            "type": "string",
+                            "description": "gatewayVersion"
+                          },
+                          "gatewayWitnessString": {
+                            "type": "object",
+                            "properties": {
+                              "EncryptedResult": {
+                                "type": "string",
+                                "description": "EncryptedResult"
+                              },
+                              "IV": {
+                                "type": "string",
+                                "description": "IV"
+                              },
+                              "Signature": {
+                                "type": "string",
+                                "description": "Signature"
+                              }
+                            },
+                            "description": "gatewayWitnessString"
+                          },
+                          "gatewayMachine": {
+                            "type": "string",
+                            "description": "gatewayMachine"
+                          },
+                          "gatewaySalt": {
+                            "type": "string",
+                            "description": "gatewaySalt"
+                          },
+                          "gatewayWitnessStringLegacy": {
+                            "type": "string",
+                            "description": "gatewayWitnessStringLegacy"
+                          },
+                          "gatewaySaltLegacy": {
+                            "type": "string",
+                            "description": "gatewaySaltLegacy"
+                          },
+                          "gatewayDepartment": {
+                            "type": "string",
+                            "description": "gatewayDepartment"
+                          },
+                          "gatewayVirtualNetworkSubnetId": {
+                            "type": "string",
+                            "description": "gatewayVirtualNetworkSubnetId"
+                          }
+                        },
+                        "description": "gatewayAnnotation"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Gateways",
+        "description": "Get Gateways",
+        "operationId": "GetGateways",
+        "parameters": []
+      }
+    },
+    "/admin/capacities/refreshables": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "@odata.count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "@odata.count"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "description": "kind"
+                      },
+                      "lastRefresh": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "id"
+                          },
+                          "refreshType": {
+                            "type": "string",
+                            "description": "refreshType"
+                          },
+                          "startTime": {
+                            "type": "string",
+                            "description": "startTime"
+                          },
+                          "endTime": {
+                            "type": "string",
+                            "description": "endTime"
+                          },
+                          "serviceExceptionJson": {
+                            "type": "string",
+                            "description": "serviceExceptionJson"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "status"
+                          },
+                          "requestId": {
+                            "type": "string",
+                            "description": "requestId"
+                          },
+                          "extendedStatus": {
+                            "type": "string",
+                            "description": "extendedStatus"
+                          }
+                        },
+                        "description": "lastRefresh"
+                      },
+                      "refreshSchedule": {
+                        "type": "object",
+                        "properties": {
+                          "days": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "days"
+                          },
+                          "times": {
+                            "type": "array",
+                            "items": {},
+                            "description": "times"
+                          },
+                          "enabled": {
+                            "type": "boolean",
+                            "description": "enabled"
+                          },
+                          "localTimeZoneId": {
+                            "type": "string",
+                            "description": "localTimeZoneId"
+                          },
+                          "notifyOption": {
+                            "type": "string",
+                            "description": "notifyOption"
+                          }
+                        },
+                        "description": "refreshSchedule"
+                      },
+                      "configuredBy": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "configuredBy"
+                      }
+                    }
+                  },
+                  "description": "value"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Refreshables As Admin",
+        "description": "Get Refreshables As Admin",
+        "operationId": "GetRefreshablesAsAdmin",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 250
+          }
+        ]
+      }
+    },
+    "/admin/workspaces/getInfo": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "createdDateTime": {
+                  "type": "string",
+                  "description": "createdDateTime"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Post Workspace Info",
+        "operationId": "PostWorkspaceInfo",
+        "description": "Post Workspace Info",
+        "parameters": [
+          {
+            "name": "lineage",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasourceDetails",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetSchema",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetExpressions",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "getArtifactUsers",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "in": "body",
+            "name": "workspaces",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/workspaces/scanStatus/{ScanId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "createdDateTime": {
+                  "type": "string",
+                  "description": "createdDateTime"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Scan Status",
+        "operationId": "GetScanStatus",
+        "description": "Get Scan Status",
+        "parameters": [
+          {
+            "name": "ScanId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/admin/workspaces/scanResult/{ScanId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "workspaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "state"
+                      },
+                      "isOnDedicatedCapacity": {
+                        "type": "boolean",
+                        "description": "isOnDedicatedCapacity"
+                      },
+                      "capacityId": {
+                        "type": "string",
+                        "description": "capacityId"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "reportType": {
+                              "type": "string",
+                              "description": "reportType"
+                            },
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "datasetId": {
+                              "type": "string",
+                              "description": "datasetId"
+                            },
+                            "createdDateTime": {
+                              "type": "string",
+                              "description": "createdDateTime"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string",
+                              "description": "modifiedDateTime"
+                            },
+                            "modifiedBy": {
+                              "type": "string",
+                              "description": "modifiedBy"
+                            },
+                            "createdBy": {
+                              "type": "string",
+                              "description": "createdBy"
+                            },
+                            "modifiedById": {
+                              "type": "string",
+                              "description": "modifiedById"
+                            },
+                            "createdById": {
+                              "type": "string",
+                              "description": "createdById"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "reportUserAccessRight": {
+                                    "type": "string",
+                                    "description": "reportUserAccessRight"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string",
+                                    "description": "emailAddress"
+                                  },
+                                  "displayName": {
+                                    "type": "string",
+                                    "description": "displayName"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "identifier"
+                                  },
+                                  "graphId": {
+                                    "type": "string",
+                                    "description": "graphId"
+                                  },
+                                  "principalType": {
+                                    "type": "string",
+                                    "description": "principalType"
+                                  }
+                                }
+                              },
+                              "description": "users"
+                            },
+                            "appId": {
+                              "type": "string",
+                              "description": "appId"
+                            }
+                          }
+                        },
+                        "description": "reports"
+                      },
+                      "dashboards": {
+                        "type": "array",
+                        "items": {},
+                        "description": "dashboards"
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "tables": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "name"
+                                  },
+                                  "columns": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "description": "name"
+                                        },
+                                        "dataType": {
+                                          "type": "string",
+                                          "description": "dataType"
+                                        },
+                                        "isHidden": {
+                                          "type": "boolean",
+                                          "description": "isHidden"
+                                        },
+                                        "columnType": {
+                                          "type": "string",
+                                          "description": "columnType"
+                                        },
+                                        "expression": {
+                                          "type": "string",
+                                          "description": "expression"
+                                        }
+                                      }
+                                    },
+                                    "description": "columns"
+                                  },
+                                  "measures": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "description": "name"
+                                        },
+                                        "expression": {
+                                          "type": "string",
+                                          "description": "expression"
+                                        },
+                                        "isHidden": {
+                                          "type": "boolean",
+                                          "description": "isHidden"
+                                        }
+                                      }
+                                    },
+                                    "description": "measures"
+                                  },
+                                  "isHidden": {
+                                    "type": "boolean",
+                                    "description": "isHidden"
+                                  },
+                                  "source": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "expression": {
+                                          "type": "string",
+                                          "description": "expression"
+                                        }
+                                      }
+                                    },
+                                    "description": "source"
+                                  }
+                                }
+                              },
+                              "description": "tables"
+                            },
+                            "configuredBy": {
+                              "type": "string",
+                              "description": "configuredBy"
+                            },
+                            "targetStorageMode": {
+                              "type": "string",
+                              "description": "targetStorageMode"
+                            },
+                            "createdDate": {
+                              "type": "string",
+                              "description": "createdDate"
+                            },
+                            "contentProviderType": {
+                              "type": "string",
+                              "description": "contentProviderType"
+                            },
+                            "datasourceUsages": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasourceInstanceId": {
+                                    "type": "string",
+                                    "description": "datasourceInstanceId"
+                                  }
+                                }
+                              },
+                              "description": "datasourceUsages"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasetUserAccessRight": {
+                                    "type": "string",
+                                    "description": "datasetUserAccessRight"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string",
+                                    "description": "emailAddress"
+                                  },
+                                  "displayName": {
+                                    "type": "string",
+                                    "description": "displayName"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "identifier"
+                                  },
+                                  "graphId": {
+                                    "type": "string",
+                                    "description": "graphId"
+                                  },
+                                  "principalType": {
+                                    "type": "string",
+                                    "description": "principalType"
+                                  }
+                                }
+                              },
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "datasets"
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "objectId": {
+                              "type": "string",
+                              "description": "objectId"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "name"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "description"
+                            },
+                            "configuredBy": {
+                              "type": "string",
+                              "description": "configuredBy"
+                            },
+                            "modifiedBy": {
+                              "type": "string",
+                              "description": "modifiedBy"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string",
+                              "description": "modifiedDateTime"
+                            },
+                            "datasourceUsages": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasourceInstanceId": {
+                                    "type": "string",
+                                    "description": "datasourceInstanceId"
+                                  }
+                                }
+                              },
+                              "description": "datasourceUsages"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "dataflowUserAccessRight": {
+                                    "type": "string",
+                                    "description": "dataflowUserAccessRight"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string",
+                                    "description": "emailAddress"
+                                  },
+                                  "displayName": {
+                                    "type": "string",
+                                    "description": "displayName"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "identifier"
+                                  },
+                                  "graphId": {
+                                    "type": "string",
+                                    "description": "graphId"
+                                  },
+                                  "principalType": {
+                                    "type": "string",
+                                    "description": "principalType"
+                                  }
+                                }
+                              },
+                              "description": "users"
+                            }
+                          }
+                        },
+                        "description": "dataflows"
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "groupUserAccessRight": {
+                              "type": "string",
+                              "description": "groupUserAccessRight"
+                            },
+                            "emailAddress": {
+                              "type": "string",
+                              "description": "emailAddress"
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "description": "displayName"
+                            },
+                            "identifier": {
+                              "type": "string",
+                              "description": "identifier"
+                            },
+                            "graphId": {
+                              "type": "string",
+                              "description": "graphId"
+                            },
+                            "principalType": {
+                              "type": "string",
+                              "description": "principalType"
+                            }
+                          }
+                        },
+                        "description": "users"
+                      }
+                    }
+                  },
+                  "description": "workspaces"
+                },
+                "datasourceInstances": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceType": {
+                        "type": "string",
+                        "description": "datasourceType"
+                      },
+                      "connectionDetails": {
+                        "type": "object",
+                        "properties": {
+                          "server": {
+                            "type": "string",
+                            "description": "server"
+                          },
+                          "database": {
+                            "type": "string",
+                            "description": "database"
+                          }
+                        },
+                        "description": "connectionDetails"
+                      },
+                      "datasourceId": {
+                        "type": "string",
+                        "description": "datasourceId"
+                      },
+                      "gatewayId": {
+                        "type": "string",
+                        "description": "gatewayId"
+                      }
+                    }
+                  },
+                  "description": "datasourceInstances"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Scan Result",
+        "operationId": "GetScanResult",
+        "description": "Get Scan Result",
+        "parameters": [
+          {
+            "name": "ScanId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.windows.net/common/oauth2/authorize",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {
+        "Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All": "Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": [
+        "Tenant.ReadWrite.All Content.Create Dashboard.ReadWrite.All Report.ReadWrite.All Dataset.ReadWrite.All Dataflow.ReadWrite.All Workspace.ReadWrite.All Capacity.ReadWrite.All Gateway.ReadWrite.All StorageAccount.ReadWrite.All"
+      ]
+    }
+  ],
+  "tags": []
+}

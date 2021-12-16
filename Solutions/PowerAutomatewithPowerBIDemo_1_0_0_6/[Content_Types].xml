@@ -1,1 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/octet-stream" /><Default Extension="json" ContentType="application/octet-stream" /><Default Extension="msapp" ContentType="application/octet-stream" /><Default Extension="Png" ContentType="application/octet-stream" /><Override PartName="/CanvasApps/devcamp_workspacemanager_6c303_BackgroundImageUri" ContentType="application/octet-stream" /><Override PartName="/CanvasApps/devcamp_powerbiassetauditor_bce19_BackgroundImageUri" ContentType="application/octet-stream" /><Override PartName="/CanvasApps/devcamp_scanman_e136f_BackgroundImageUri" ContentType="application/octet-stream" /></Types>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="xml" ContentType="application/octet-stream" />
+  <Default Extension="json" ContentType="application/octet-stream" />
+  <Default Extension="msapp" ContentType="application/octet-stream" />
+  <Default Extension="Png" ContentType="application/octet-stream" />
+  <Override PartName="/CanvasApps/devcamp_workspacemanager_6c303_BackgroundImageUri" ContentType="application/octet-stream" />
+  <Override PartName="/CanvasApps/devcamp_powerbiassetauditor_bce19_BackgroundImageUri" ContentType="application/octet-stream" />
+  <Override PartName="/CanvasApps/devcamp_scanman_e136f_BackgroundImageUri" ContentType="application/octet-stream" />
+</Types>

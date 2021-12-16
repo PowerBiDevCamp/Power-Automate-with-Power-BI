@@ -1,1 +1,680 @@
-{"properties":{"connectionReferences":{},"definition":{"$schema":"https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#","contentVersion":"1.0.0.0","parameters":{"$authentication":{"defaultValue":{},"type":"SecureObject"}},"triggers":{"manual":{"metadata":{"operationMetadataId":"c1354e03-3f3e-4195-bde5-22d872421856"},"type":"Request","kind":"PowerApp","inputs":{"schema":{"type":"object","properties":{"WorkspaceId_Inputs":{"type":"any","description":"Inputs","x-ms-powerflows-param-ispartial":false}},"required":["WorkspaceId_Inputs"]}}}},"actions":{"Run_a_Child_Flow":{"runAfter":{"WorkspaceId":["Succeeded"]},"metadata":{"operationMetadataId":"bf12888d-1f22-44e2-a764-91c1a6812cb3"},"type":"Workflow","inputs":{"host":{"workflowReferenceName":"176041b8-1f52-ec11-8c62-00224806ee25"}}},"access_token":{"runAfter":{"Run_a_Child_Flow":["Succeeded"]},"metadata":{"operationMetadataId":"c2d1e02c-7bff-4a5e-8222-c9c0e3b09af3"},"type":"Compose","inputs":"@body('Run_a_Child_Flow')?['access_token']"},"PostWorkspaceInfo":{"runAfter":{"access_token":["Succeeded"]},"metadata":{"operationMetadataId":"470e0c26-09eb-4066-a0eb-bc682f1b00fe"},"type":"Http","inputs":{"method":"POST","uri":"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo","headers":{"Content-Type":"application/json; charset=utf-8","Content-Length":"72","Authorization":"Bearer @{outputs('access_token')}"},"queries":{"lineage":"true","datasourceDetails":"true","datasetSchema":"true","datasetExpressions":"true","getArtifactUsers":"true"},"body":{"workspaces":["@{outputs('WorkspaceId')}"]}}},"PostWorkspaceInfoResults":{"runAfter":{"PostWorkspaceInfo":["Succeeded"]},"metadata":{"operationMetadataId":"2a698a09-76b4-4b58-a8df-ab4f42fcb696"},"type":"ParseJson","inputs":{"content":"@body('PostWorkspaceInfo')","schema":{"type":"object","properties":{"id":{"type":"string"},"createdDateTime":{"type":"string"},"status":{"type":"string"}}}}},"Initialize_variable_scan_id":{"runAfter":{"PostWorkspaceInfoResults":["Succeeded"]},"metadata":{"operationMetadataId":"31057e95-65f9-4c61-ad19-0a3b986ebb5e"},"type":"InitializeVariable","inputs":{"variables":[{"name":"scan_id","type":"string","value":"@body('PostWorkspaceInfoResults')?['id']"}]}},"Initialize_variable_scan_complete":{"runAfter":{"Initialize_variable_scan_id":["Succeeded"]},"metadata":{"operationMetadataId":"00fdc96d-0169-47d6-a8b9-d798127483ba"},"type":"InitializeVariable","inputs":{"variables":[{"name":"scan_complete","type":"boolean","value":false}]}},"Wait_until_workspace_scan_is_complete":{"actions":{"GetScanStatusResult":{"runAfter":{"GetScanStatus":["Succeeded"]},"metadata":{"operationMetadataId":"e649d9df-2fb6-4060-ad6d-4509efdf489e"},"type":"ParseJson","inputs":{"content":"@body('GetScanStatus')","schema":{"type":"object","properties":{"id":{"type":"string"},"createdDateTime":{"type":"string"},"status":{"type":"string"}}}}},"Condition":{"actions":{"Set_variable":{"runAfter":{},"metadata":{"operationMetadataId":"fdf0cbc8-7c91-42af-87a6-61e1d47f5503"},"type":"SetVariable","inputs":{"name":"scan_complete","value":true}}},"runAfter":{"GetScanStatusResult":["Succeeded"]},"expression":{"equals":["@body('GetScanStatusResult')?['status']","Succeeded"]},"metadata":{"operationMetadataId":"d6536d66-229d-4157-8dde-bd0cbaf23006"},"type":"If"},"Delay":{"runAfter":{},"metadata":{"operationMetadataId":"b561bf4f-7d5a-4a42-9c61-758501099825"},"type":"Wait","inputs":{"interval":{"count":2,"unit":"Second"}}},"GetScanStatus":{"runAfter":{"Delay":["Succeeded"]},"metadata":{"operationMetadataId":"96c9d622-170c-4799-86e4-4c6659787b36"},"type":"Http","inputs":{"method":"GET","uri":"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanStatus/@{variables('scan_id')}","headers":{"Authorization":"Bearer @{outputs('access_token')}"}}}},"runAfter":{"Initialize_variable_scan_complete":["Succeeded"]},"expression":"@equals(variables('scan_complete'), true)","limit":{"count":60,"timeout":"PT1H"},"metadata":{"operationMetadataId":"8b2158f0-6295-4529-b0f8-cf06d51b834e"},"type":"Until"},"GetScanResult":{"runAfter":{"Wait_until_workspace_scan_is_complete":["Succeeded"]},"metadata":{"operationMetadataId":"24f68df1-2e0d-4610-bbe0-67192663be80"},"type":"Http","inputs":{"method":"GET","uri":"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanResult/@{variables('scan_id')}","headers":{"Authorization":"Bearer @{outputs('access_token')}"}}},"Response":{"runAfter":{"GetScanResult":["Succeeded"]},"metadata":{"operationMetadataId":"b3865939-a304-430f-852e-83976c2049b2"},"type":"Response","kind":"Http","inputs":{"statusCode":200,"body":"@body('GetScanResult')","schema":{"type":"object","properties":{"workspaces":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"type":{"type":"string"},"state":{"type":"string"},"isOnDedicatedCapacity":{"type":"boolean"},"capacityId":{"type":"string"},"reports":{"type":"array","items":{"type":"object","properties":{"reportType":{"type":"string"},"id":{"type":"string"},"name":{"type":"string"},"datasetId":{"type":"string"},"createdDateTime":{"type":"string"},"modifiedDateTime":{"type":"string"},"modifiedBy":{"type":"string"},"createdBy":{"type":"string"},"modifiedById":{"type":"string"},"createdById":{"type":"string"},"users":{"type":"array","items":{"type":"object","properties":{"reportUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{"type":"string"},"principalType":{"type":"string"}}}}}}},"dashboards":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"displayName":{"type":"string"},"isReadOnly":{"type":"boolean"},"tiles":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"reportId":{"type":"string"},"datasetId":{"type":"string"}}}},"users":{"type":"array","items":{"type":"object","properties":{"dashboardUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{"type":"string"},"principalType":{"type":"string"}}}}}}},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"tables":{"type":"array"},"configuredBy":{"type":"string"},"targetStorageMode":{"type":"string"},"createdDate":{"type":"string"},"contentProviderType":{"type":"string"},"datasourceUsages":{"type":"array","items":{"type":"object","properties":{"datasourceInstanceId":{"type":"string"}}}},"users":{"type":"array","items":{"type":"object","properties":{"datasetUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{"type":"string"},"principalType":{"type":"string"}}}},"upstreamDataflows":{"type":"array","items":{"type":"object","properties":{"targetDataflowId":{"type":"string"},"groupId":{"type":"string"}}}},"schemaMayNotBeUpToDate":{"type":"boolean"}}}},"dataflows":{"type":"array","items":{"type":"object","properties":{"objectId":{"type":"string"},"name":{"type":"string"},"description":{"type":"string"},"configuredBy":{"type":"string"},"modifiedBy":{"type":"string"},"modifiedDateTime":{"type":"string"},"datasourceUsages":{"type":"array","items":{"type":"object","properties":{"datasourceInstanceId":{"type":"string"}}}},"users":{"type":"array","items":{"type":"object","properties":{"dataflowUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{"type":"string"},"principalType":{"type":"string"}}}}}}},"users":{"type":"array","items":{"type":"object","properties":{"groupUserAccessRight":{"type":"string"},"emailAddress":{"type":"string"},"displayName":{"type":"string"},"identifier":{"type":"string"},"graphId":{"type":"string"},"principalType":{"type":"string"}}}}}}},"datasourceInstances":{"type":"array","items":{"type":"object","properties":{"datasourceType":{"type":"string"},"connectionDetails":{"type":"object","properties":{"server":{"type":"string"},"database":{"type":"string"},"url":{"type":"string"}}},"datasourceId":{"type":"string"},"gatewayId":{"type":"string"}}}}}}}},"WorkspaceId":{"runAfter":{},"metadata":{"operationMetadataId":"644e7fc2-2175-4855-a4cb-9fca1b7e676a"},"type":"Compose","inputs":"@triggerBody()['WorkspaceId_Inputs']"}}}},"schemaVersion":"1.0.0.0"}
+{
+  "properties": {
+    "connectionReferences": {},
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c1354e03-3f3e-4195-bde5-22d872421856"
+          },
+          "type": "Request",
+          "kind": "PowerApp",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "WorkspaceId_Inputs": {
+                  "type": "any",
+                  "description": "Inputs",
+                  "x-ms-powerflows-param-ispartial": false
+                }
+              },
+              "required": [
+                "WorkspaceId_Inputs"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {
+            "WorkspaceId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "bf12888d-1f22-44e2-a764-91c1a6812cb3"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "176041b8-1f52-ec11-8c62-00224806ee25"
+            }
+          }
+        },
+        "access_token": {
+          "runAfter": {
+            "Run_a_Child_Flow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c2d1e02c-7bff-4a5e-8222-c9c0e3b09af3"
+          },
+          "type": "Compose",
+          "inputs": "@body('Run_a_Child_Flow')?['access_token']"
+        },
+        "PostWorkspaceInfo": {
+          "runAfter": {
+            "access_token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "470e0c26-09eb-4066-a0eb-bc682f1b00fe"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "POST",
+            "uri": "https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo",
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "72",
+              "Authorization": "Bearer @{outputs('access_token')}"
+            },
+            "queries": {
+              "lineage": "true",
+              "datasourceDetails": "true",
+              "datasetSchema": "true",
+              "datasetExpressions": "true",
+              "getArtifactUsers": "true"
+            },
+            "body": {
+              "workspaces": [
+                "@{outputs('WorkspaceId')}"
+              ]
+            }
+          }
+        },
+        "PostWorkspaceInfoResults": {
+          "runAfter": {
+            "PostWorkspaceInfo": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2a698a09-76b4-4b58-a8df-ab4f42fcb696"
+          },
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('PostWorkspaceInfo')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "createdDateTime": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Initialize_variable_scan_id": {
+          "runAfter": {
+            "PostWorkspaceInfoResults": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "31057e95-65f9-4c61-ad19-0a3b986ebb5e"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "scan_id",
+                "type": "string",
+                "value": "@body('PostWorkspaceInfoResults')?['id']"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_scan_complete": {
+          "runAfter": {
+            "Initialize_variable_scan_id": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "00fdc96d-0169-47d6-a8b9-d798127483ba"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "scan_complete",
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        },
+        "Wait_until_workspace_scan_is_complete": {
+          "actions": {
+            "GetScanStatusResult": {
+              "runAfter": {
+                "GetScanStatus": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e649d9df-2fb6-4060-ad6d-4509efdf489e"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('GetScanStatus')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "createdDateTime": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "Condition": {
+              "actions": {
+                "Set_variable": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "fdf0cbc8-7c91-42af-87a6-61e1d47f5503"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "scan_complete",
+                    "value": true
+                  }
+                }
+              },
+              "runAfter": {
+                "GetScanStatusResult": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@body('GetScanStatusResult')?['status']",
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "d6536d66-229d-4157-8dde-bd0cbaf23006"
+              },
+              "type": "If"
+            },
+            "Delay": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "b561bf4f-7d5a-4a42-9c61-758501099825"
+              },
+              "type": "Wait",
+              "inputs": {
+                "interval": {
+                  "count": 2,
+                  "unit": "Second"
+                }
+              }
+            },
+            "GetScanStatus": {
+              "runAfter": {
+                "Delay": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "96c9d622-170c-4799-86e4-4c6659787b36"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanStatus/@{variables('scan_id')}",
+                "headers": {
+                  "Authorization": "Bearer @{outputs('access_token')}"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_scan_complete": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@equals(variables('scan_complete'), true)",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "8b2158f0-6295-4529-b0f8-cf06d51b834e"
+          },
+          "type": "Until"
+        },
+        "GetScanResult": {
+          "runAfter": {
+            "Wait_until_workspace_scan_is_complete": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "24f68df1-2e0d-4610-bbe0-67192663be80"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanResult/@{variables('scan_id')}",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}"
+            }
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "GetScanResult": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b3865939-a304-430f-852e-83976c2049b2"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@body('GetScanResult')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "workspaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "isOnDedicatedCapacity": {
+                        "type": "boolean"
+                      },
+                      "capacityId": {
+                        "type": "string"
+                      },
+                      "reports": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "reportType": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "datasetId": {
+                              "type": "string"
+                            },
+                            "createdDateTime": {
+                              "type": "string"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string"
+                            },
+                            "modifiedBy": {
+                              "type": "string"
+                            },
+                            "createdBy": {
+                              "type": "string"
+                            },
+                            "modifiedById": {
+                              "type": "string"
+                            },
+                            "createdById": {
+                              "type": "string"
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "reportUserAccessRight": {
+                                    "type": "string"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string"
+                                  },
+                                  "displayName": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "graphId": {
+                                    "type": "string"
+                                  },
+                                  "principalType": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dashboards": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "type": "string"
+                            },
+                            "isReadOnly": {
+                              "type": "boolean"
+                            },
+                            "tiles": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "reportId": {
+                                    "type": "string"
+                                  },
+                                  "datasetId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "dashboardUserAccessRight": {
+                                    "type": "string"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string"
+                                  },
+                                  "displayName": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "graphId": {
+                                    "type": "string"
+                                  },
+                                  "principalType": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "tables": {
+                              "type": "array"
+                            },
+                            "configuredBy": {
+                              "type": "string"
+                            },
+                            "targetStorageMode": {
+                              "type": "string"
+                            },
+                            "createdDate": {
+                              "type": "string"
+                            },
+                            "contentProviderType": {
+                              "type": "string"
+                            },
+                            "datasourceUsages": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasourceInstanceId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasetUserAccessRight": {
+                                    "type": "string"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string"
+                                  },
+                                  "displayName": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "graphId": {
+                                    "type": "string"
+                                  },
+                                  "principalType": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "upstreamDataflows": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "targetDataflowId": {
+                                    "type": "string"
+                                  },
+                                  "groupId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "schemaMayNotBeUpToDate": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "dataflows": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "objectId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "configuredBy": {
+                              "type": "string"
+                            },
+                            "modifiedBy": {
+                              "type": "string"
+                            },
+                            "modifiedDateTime": {
+                              "type": "string"
+                            },
+                            "datasourceUsages": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "datasourceInstanceId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "dataflowUserAccessRight": {
+                                    "type": "string"
+                                  },
+                                  "emailAddress": {
+                                    "type": "string"
+                                  },
+                                  "displayName": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "graphId": {
+                                    "type": "string"
+                                  },
+                                  "principalType": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "users": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "groupUserAccessRight": {
+                              "type": "string"
+                            },
+                            "emailAddress": {
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "type": "string"
+                            },
+                            "identifier": {
+                              "type": "string"
+                            },
+                            "graphId": {
+                              "type": "string"
+                            },
+                            "principalType": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "datasourceInstances": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceType": {
+                        "type": "string"
+                      },
+                      "connectionDetails": {
+                        "type": "object",
+                        "properties": {
+                          "server": {
+                            "type": "string"
+                          },
+                          "database": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "gatewayId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "WorkspaceId": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "644e7fc2-2175-4855-a4cb-9fca1b7e676a"
+          },
+          "type": "Compose",
+          "inputs": "@triggerBody()['WorkspaceId_Inputs']"
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,1 +1,671 @@
-{"properties":{"connectionReferences":{"shared_sharepointonline":{"runtimeSource":"invoker","connection":{"connectionReferenceLogicalName":"devcamp_sharedsharepointonline_b16ee"},"api":{"name":"shared_sharepointonline"}}},"definition":{"$schema":"https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#","contentVersion":"1.0.0.0","parameters":{"$connections":{"defaultValue":{},"type":"Object"},"$authentication":{"defaultValue":{},"type":"SecureObject"}},"triggers":{"manual":{"metadata":{"operationMetadataId":"86c03431-050e-4185-8096-fffa263617e6"},"type":"Request","kind":"PowerAppV2","inputs":{"schema":{"type":"object","properties":{"text":{"title":"WorkspaceId","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"},"text_1":{"title":"ImportName","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"},"text_2":{"title":"DatabaseServer","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"},"text_3":{"title":"DatabaseName","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"},"text_4":{"title":"DatabaseUserName","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"},"text_5":{"title":"DatabaseUserPassword","type":"string","x-ms-dynamically-added":true,"description":"Please enter your input","x-ms-content-hint":"TEXT"}},"required":["text","text_1","text_2","text_3","text_4","text_5"]}}}},"actions":{"Run_a_Child_Flow":{"runAfter":{},"metadata":{"operationMetadataId":"4bd0cc00-5a3c-41f4-8115-c2fa74112e8b"},"type":"Workflow","inputs":{"host":{"workflowReferenceName":"176041b8-1f52-ec11-8c62-00224806ee25"}}},"access_token":{"runAfter":{"Run_a_Child_Flow":["Succeeded"]},"metadata":{"operationMetadataId":"caf28ad8-6d3b-4148-a310-7dc7f602083c"},"type":"Compose","inputs":"@body('Run_a_Child_Flow')?['access_token']"},"Get_PBIX_Template":{"runAfter":{"access_token":["Succeeded"]},"metadata":{"%252fPowerBiTemplates%252fCustomer%2bSales.pbix":"/PowerBiTemplates/Customer Sales.pbix","operationMetadataId":"158a4df0-99a6-4222-b7ae-6cd3273d6ea5"},"type":"OpenApiConnection","inputs":{"host":{"connectionName":"shared_sharepointonline","operationId":"GetFileContent","apiId":"/providers/Microsoft.PowerApps/apis/shared_sharepointonline"},"parameters":{"dataset":"https://pbi4xmas.sharepoint.com/","id":"%252fPowerBiTemplates%252fCustomer%2bSales.pbix","inferContentType":true},"authentication":"@parameters('$authentication')"}},"PostImportWithPbix":{"runAfter":{"Get_PBIX_Template":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"POST","uri":"https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/imports/","headers":{"Authorization":"Bearer @{outputs('access_token')}","Content-Type":"multipart/form-data; boundary=\"cf9ec612-6e94-485a-9fb3-e72db09ee893\""},"queries":{"datasetDisplayName":"@triggerBody()['text_1']","nameConflict":"CreateOrOverwrite"},"body":{"$content-type":"multipart/form-data","$multipart":[{"body":"@body('Get_PBIX_Template')"}]}}},"Initialize_variable_for_ImportId":{"runAfter":{"PostImportWithPbixResponse":["Succeeded"]},"metadata":{"operationMetadataId":"9a7fb0dd-a1f6-45bf-b6d2-ad3386b86975"},"type":"InitializeVariable","inputs":{"variables":[{"name":"ImportId","type":"string","value":"@body('PostImportWithPbixResponse')?['id']"}]}},"PostImportWithPbixResponse":{"runAfter":{"PostImportWithPbix":["Succeeded"]},"metadata":{"operationMetadataId":"d10f75b6-dabe-4d3f-bb3b-064733f5be09"},"type":"ParseJson","inputs":{"content":"@body('PostImportWithPbix')","schema":{"type":"object","properties":{"id":{"type":"string"}}}}},"Initialize_variable_for_ImportState":{"runAfter":{"Initialize_variable_for_ImportId":["Succeeded"]},"metadata":{"operationMetadataId":"f3734d91-9c93-4ba1-9e14-c4096f73ec3a"},"type":"InitializeVariable","inputs":{"variables":[{"name":"ImportState","type":"string","value":"Pending"}]}},"Initialize_variable_for_DatasetId":{"runAfter":{"Do_until":["Succeeded"]},"metadata":{"operationMetadataId":"0a018ded-5726-4783-b452-92c7dd8bf997"},"type":"InitializeVariable","inputs":{"variables":[{"name":"DatasetId","type":"string","value":"@{body('GetImportStateResult')?['datasets'][0]['id']}"}]}},"Do_until":{"actions":{"GetImportStateResult":{"runAfter":{"GetImportState":["Succeeded"]},"metadata":{"operationMetadataId":"5175ef42-4e12-495a-8991-5abe60709ab2"},"type":"ParseJson","inputs":{"content":"@body('GetImportState')","schema":{"type":"object","properties":{"@@odata.context":{"type":"string"},"id":{"type":"string"},"importState":{"type":"string"},"createdDateTime":{"type":"string"},"updatedDateTime":{"type":"string"},"name":{"type":"string"},"connectionType":{"type":"string"},"source":{"type":"string"},"datasets":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"webUrl":{"type":"string"},"targetStorageMode":{"type":"string"},"upstreamDatasets":{"type":"array"},"schemaMayNotBeUpToDate":{"type":"boolean"},"users":{"type":"array"}},"required":["id","name","webUrl","targetStorageMode","upstreamDatasets","schemaMayNotBeUpToDate","users"]}},"reports":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"reportType":{"type":"string"},"name":{"type":"string"},"webUrl":{"type":"string"},"embedUrl":{"type":"string"},"users":{"type":"array"},"subscriptions":{"type":"array"}},"required":["id","reportType","name","webUrl","embedUrl","users","subscriptions"]}},"dataflows":{"type":"array"}}}}},"Set_variable":{"runAfter":{"GetImportStateResult":["Succeeded"]},"metadata":{"operationMetadataId":"da21e989-630c-430c-bed3-4fbcb7fed20b"},"type":"SetVariable","inputs":{"name":"ImportState","value":"@body('GetImportStateResult')?['importState']"}},"Delay_for_2_seconds":{"runAfter":{},"metadata":{"operationMetadataId":"4193ccbd-a781-475e-b0b9-3cbcc99c0e32"},"type":"Wait","inputs":{"interval":{"count":2,"unit":"Second"}}},"GetImportState":{"runAfter":{"Delay_for_2_seconds":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"GET","uri":"https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/imports/@{variables('ImportId')}","headers":{"Authorization":"Bearer @{outputs('access_token')}"}}}},"runAfter":{"Initialize_variable_for_ImportState":["Succeeded"]},"expression":"@not(equals(variables('ImportState'), 'Pending'))","limit":{"count":60,"timeout":"PT1H"},"metadata":{"operationMetadataId":"3077866c-8552-46b8-b5c2-e05718b7afbe"},"type":"Until"},"PostUpdateDatasetParameters":{"runAfter":{"Initialize_variable_for_DatasetId":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"POST","uri":"https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/Default.UpdateParameters\n\n","headers":{"Authorization":"Bearer @{outputs('access_token')}","Content-Type":"application/json"},"body":{"updateDetails":[{"name":"DatabaseServer","newValue":"@{triggerBody()?['text_2']}"},{"name":"DatabaseName","newValue":"@{triggerBody()?['text_3']}"}]}}},"GetDatasourcesForDataset":{"runAfter":{"PostUpdateDatasetParameters":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"GET","uri":"https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/datasources","headers":{"Authorization":"Bearer @{outputs('access_token')}"}}},"GetDatasourcesForDatasetResult":{"runAfter":{"GetDatasourcesForDataset":["Succeeded"]},"metadata":{"operationMetadataId":"67255cfe-2ad6-4cb3-aae9-2fbad59a2ad5"},"type":"ParseJson","inputs":{"content":"@body('GetDatasourcesForDataset')","schema":{"type":"object","properties":{"@@odata.context":{"type":"string"},"value":{"type":"array","items":{"type":"object","properties":{"datasourceType":{"type":"string"},"connectionDetails":{"type":"object","properties":{"server":{"type":"string"},"database":{"type":"string"}}},"datasourceId":{"type":"string"},"gatewayId":{"type":"string"}},"required":["datasourceType","connectionDetails","datasourceId","gatewayId"]}}}}}},"Initialize_variable_for_DatasourceId":{"runAfter":{"GetDatasourcesForDatasetResult":["Succeeded"]},"metadata":{"operationMetadataId":"e8b5b1c3-061a-4be6-8d23-3e818bb60bda"},"type":"InitializeVariable","inputs":{"variables":[{"name":"DatasourceId","type":"string","value":"@{body('GetDatasourcesForDatasetResult')?['value'][0]['datasourceId']}"}]}},"Initialize_variable_for_GatewayId":{"runAfter":{"Initialize_variable_for_DatasourceId":["Succeeded"]},"metadata":{"operationMetadataId":"7318998e-cd26-4765-a55a-6c2c604e7ced"},"type":"InitializeVariable","inputs":{"variables":[{"name":"GatewayId","type":"string","value":"@{body('GetDatasourcesForDatasetResult')?['value'][0]['gatewayId']}"}]}},"PatchUpdateDatasource":{"runAfter":{"Initialize_variable_for_GatewayId":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"PATCH","uri":"https://api.powerbi.com/v1.0/myorg/gateways/@{variables('GatewayId')}/datasources/@{variables('DatasourceId')}","headers":{"Authorization":"Bearer @{outputs('access_token')}","Content-Type":"application/json"},"body":{"credentialDetails":{"credentials":"{\"credentialData\":[{\"name\":\"username\",\"value\":\"@{triggerBody()?['text_4']}\"},{\"name\":\"password\",\"value\":\"@{triggerBody()?['text_5']}\"}]}","credentialType":"Basic","encryptedConnection":"NotEncrypted","encryptionAlgorithm":"None","privacyLevel":"None","useCallerAADIdentity":false}}}},"PostRefreshDataset":{"runAfter":{"PatchUpdateDatasource":["Succeeded"]},"metadata":{"operationMetadataId":"891aa625-5807-4dd5-a553-f8085923facd"},"type":"Http","inputs":{"method":"POST","uri":"https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/refreshes\n\n","headers":{"Authorization":"Bearer @{outputs('access_token')}","Content-Type":"application/json"},"body":{"updateDetails":[{"name":"DatabaseServer","newValue":"@{triggerBody()?['text_2']}"},{"name":"DatabaseName","newValue":"@{triggerBody()?['text_3']}"}]}}},"Respond_to_a_PowerApp_or_flow":{"runAfter":{"PostRefreshDataset":["Succeeded"]},"metadata":{"operationMetadataId":"21d96b7d-efe9-46c5-824d-bf50d57faf95"},"type":"Response","kind":"PowerApp","inputs":{"statusCode":200,"body":{},"schema":{"type":"object","properties":{}}}}}}},"schemaVersion":"1.0.0.0"}
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "devcamp_sharedsharepointonline_b16ee"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "86c03431-050e-4185-8096-fffa263617e6"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "WorkspaceId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "ImportName",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "DatabaseServer",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_3": {
+                  "title": "DatabaseName",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_4": {
+                  "title": "DatabaseUserName",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_5": {
+                  "title": "DatabaseUserPassword",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2",
+                "text_3",
+                "text_4",
+                "text_5"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "4bd0cc00-5a3c-41f4-8115-c2fa74112e8b"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "176041b8-1f52-ec11-8c62-00224806ee25"
+            }
+          }
+        },
+        "access_token": {
+          "runAfter": {
+            "Run_a_Child_Flow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "caf28ad8-6d3b-4148-a310-7dc7f602083c"
+          },
+          "type": "Compose",
+          "inputs": "@body('Run_a_Child_Flow')?['access_token']"
+        },
+        "Get_PBIX_Template": {
+          "runAfter": {
+            "access_token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "%252fPowerBiTemplates%252fCustomer%2bSales.pbix": "/PowerBiTemplates/Customer Sales.pbix",
+            "operationMetadataId": "158a4df0-99a6-4222-b7ae-6cd3273d6ea5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_sharepointonline",
+              "operationId": "GetFileContent",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+            },
+            "parameters": {
+              "dataset": "https://pbi4xmas.sharepoint.com/",
+              "id": "%252fPowerBiTemplates%252fCustomer%2bSales.pbix",
+              "inferContentType": true
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "PostImportWithPbix": {
+          "runAfter": {
+            "Get_PBIX_Template": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "POST",
+            "uri": "https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/imports/",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}",
+              "Content-Type": "multipart/form-data; boundary=\"cf9ec612-6e94-485a-9fb3-e72db09ee893\""
+            },
+            "queries": {
+              "datasetDisplayName": "@triggerBody()['text_1']",
+              "nameConflict": "CreateOrOverwrite"
+            },
+            "body": {
+              "$content-type": "multipart/form-data",
+              "$multipart": [
+                {
+                  "body": "@body('Get_PBIX_Template')"
+                }
+              ]
+            }
+          }
+        },
+        "Initialize_variable_for_ImportId": {
+          "runAfter": {
+            "PostImportWithPbixResponse": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9a7fb0dd-a1f6-45bf-b6d2-ad3386b86975"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "ImportId",
+                "type": "string",
+                "value": "@body('PostImportWithPbixResponse')?['id']"
+              }
+            ]
+          }
+        },
+        "PostImportWithPbixResponse": {
+          "runAfter": {
+            "PostImportWithPbix": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d10f75b6-dabe-4d3f-bb3b-064733f5be09"
+          },
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('PostImportWithPbix')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Initialize_variable_for_ImportState": {
+          "runAfter": {
+            "Initialize_variable_for_ImportId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f3734d91-9c93-4ba1-9e14-c4096f73ec3a"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "ImportState",
+                "type": "string",
+                "value": "Pending"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_for_DatasetId": {
+          "runAfter": {
+            "Do_until": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0a018ded-5726-4783-b452-92c7dd8bf997"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DatasetId",
+                "type": "string",
+                "value": "@{body('GetImportStateResult')?['datasets'][0]['id']}"
+              }
+            ]
+          }
+        },
+        "Do_until": {
+          "actions": {
+            "GetImportStateResult": {
+              "runAfter": {
+                "GetImportState": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5175ef42-4e12-495a-8991-5abe60709ab2"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('GetImportState')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "@@odata.context": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "importState": {
+                      "type": "string"
+                    },
+                    "createdDateTime": {
+                      "type": "string"
+                    },
+                    "updatedDateTime": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "connectionType": {
+                      "type": "string"
+                    },
+                    "source": {
+                      "type": "string"
+                    },
+                    "datasets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "webUrl": {
+                            "type": "string"
+                          },
+                          "targetStorageMode": {
+                            "type": "string"
+                          },
+                          "upstreamDatasets": {
+                            "type": "array"
+                          },
+                          "schemaMayNotBeUpToDate": {
+                            "type": "boolean"
+                          },
+                          "users": {
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "webUrl",
+                          "targetStorageMode",
+                          "upstreamDatasets",
+                          "schemaMayNotBeUpToDate",
+                          "users"
+                        ]
+                      }
+                    },
+                    "reports": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "reportType": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "webUrl": {
+                            "type": "string"
+                          },
+                          "embedUrl": {
+                            "type": "string"
+                          },
+                          "users": {
+                            "type": "array"
+                          },
+                          "subscriptions": {
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "reportType",
+                          "name",
+                          "webUrl",
+                          "embedUrl",
+                          "users",
+                          "subscriptions"
+                        ]
+                      }
+                    },
+                    "dataflows": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "Set_variable": {
+              "runAfter": {
+                "GetImportStateResult": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "da21e989-630c-430c-bed3-4fbcb7fed20b"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "ImportState",
+                "value": "@body('GetImportStateResult')?['importState']"
+              }
+            },
+            "Delay_for_2_seconds": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "4193ccbd-a781-475e-b0b9-3cbcc99c0e32"
+              },
+              "type": "Wait",
+              "inputs": {
+                "interval": {
+                  "count": 2,
+                  "unit": "Second"
+                }
+              }
+            },
+            "GetImportState": {
+              "runAfter": {
+                "Delay_for_2_seconds": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/imports/@{variables('ImportId')}",
+                "headers": {
+                  "Authorization": "Bearer @{outputs('access_token')}"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_for_ImportState": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@not(equals(variables('ImportState'), 'Pending'))",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "3077866c-8552-46b8-b5c2-e05718b7afbe"
+          },
+          "type": "Until"
+        },
+        "PostUpdateDatasetParameters": {
+          "runAfter": {
+            "Initialize_variable_for_DatasetId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "POST",
+            "uri": "https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/Default.UpdateParameters\n\n",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}",
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "updateDetails": [
+                {
+                  "name": "DatabaseServer",
+                  "newValue": "@{triggerBody()?['text_2']}"
+                },
+                {
+                  "name": "DatabaseName",
+                  "newValue": "@{triggerBody()?['text_3']}"
+                }
+              ]
+            }
+          }
+        },
+        "GetDatasourcesForDataset": {
+          "runAfter": {
+            "PostUpdateDatasetParameters": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/datasources",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}"
+            }
+          }
+        },
+        "GetDatasourcesForDatasetResult": {
+          "runAfter": {
+            "GetDatasourcesForDataset": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "67255cfe-2ad6-4cb3-aae9-2fbad59a2ad5"
+          },
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('GetDatasourcesForDataset')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@@odata.context": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceType": {
+                        "type": "string"
+                      },
+                      "connectionDetails": {
+                        "type": "object",
+                        "properties": {
+                          "server": {
+                            "type": "string"
+                          },
+                          "database": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "gatewayId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "datasourceType",
+                      "connectionDetails",
+                      "datasourceId",
+                      "gatewayId"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Initialize_variable_for_DatasourceId": {
+          "runAfter": {
+            "GetDatasourcesForDatasetResult": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e8b5b1c3-061a-4be6-8d23-3e818bb60bda"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DatasourceId",
+                "type": "string",
+                "value": "@{body('GetDatasourcesForDatasetResult')?['value'][0]['datasourceId']}"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_for_GatewayId": {
+          "runAfter": {
+            "Initialize_variable_for_DatasourceId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7318998e-cd26-4765-a55a-6c2c604e7ced"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "GatewayId",
+                "type": "string",
+                "value": "@{body('GetDatasourcesForDatasetResult')?['value'][0]['gatewayId']}"
+              }
+            ]
+          }
+        },
+        "PatchUpdateDatasource": {
+          "runAfter": {
+            "Initialize_variable_for_GatewayId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "PATCH",
+            "uri": "https://api.powerbi.com/v1.0/myorg/gateways/@{variables('GatewayId')}/datasources/@{variables('DatasourceId')}",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}",
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "credentialDetails": {
+                "credentials": "{\"credentialData\":[{\"name\":\"username\",\"value\":\"@{triggerBody()?['text_4']}\"},{\"name\":\"password\",\"value\":\"@{triggerBody()?['text_5']}\"}]}",
+                "credentialType": "Basic",
+                "encryptedConnection": "NotEncrypted",
+                "encryptionAlgorithm": "None",
+                "privacyLevel": "None",
+                "useCallerAADIdentity": false
+              }
+            }
+          }
+        },
+        "PostRefreshDataset": {
+          "runAfter": {
+            "PatchUpdateDatasource": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "891aa625-5807-4dd5-a553-f8085923facd"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "POST",
+            "uri": "https://api.powerbi.com/v1.0/myorg/groups/@{triggerBody()['text']}/datasets/@{variables('DatasetId')}/refreshes\n\n",
+            "headers": {
+              "Authorization": "Bearer @{outputs('access_token')}",
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "updateDetails": [
+                {
+                  "name": "DatabaseServer",
+                  "newValue": "@{triggerBody()?['text_2']}"
+                },
+                {
+                  "name": "DatabaseName",
+                  "newValue": "@{triggerBody()?['text_3']}"
+                }
+              ]
+            }
+          }
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "PostRefreshDataset": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "21d96b7d-efe9-46c5-824d-bf50d57faf95"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {},
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}

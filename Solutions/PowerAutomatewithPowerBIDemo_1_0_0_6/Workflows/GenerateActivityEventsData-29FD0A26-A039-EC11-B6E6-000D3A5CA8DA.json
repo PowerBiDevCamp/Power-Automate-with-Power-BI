@@ -1,1 +1,356 @@
-{"properties":{"connectionReferences":{"shared_sharepointonline_1":{"runtimeSource":"embedded","connection":{"connectionReferenceLogicalName":"devcamp_sharedsharepointonline_b16ee"},"api":{"name":"shared_sharepointonline"}},"shared_devcamp-5fpowerbiadmin-5fe546196541960f1e":{"runtimeSource":"embedded","connection":{"connectionReferenceLogicalName":"devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_f557a"},"api":{"name":"shared_devcamp-5fpowerbiadmin-5fe546196541960f1e","logicalName":"devcamp_5Fpowerbiadmin"}}},"definition":{"$schema":"https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#","contentVersion":"1.0.0.0","parameters":{"$connections":{"defaultValue":{},"type":"Object"},"$authentication":{"defaultValue":{},"type":"SecureObject"}},"triggers":{"manual":{"metadata":{"operationMetadataId":"fc499704-ad60-42b5-91e0-ded3b0553288"},"type":"Request","kind":"PowerAppV2","inputs":{"schema":{"type":"object","properties":{"date":{"title":"ActivityDate","type":"string","format":"date","x-ms-dynamically-added":true,"description":"Please enter or select a date (YYYY-MM-DD)","x-ms-content-hint":"DATE"}},"required":["date"]}}}},"actions":{"Initialize_startDate":{"runAfter":{"Respond_to_a_PowerApp_or_flow":["Succeeded"]},"metadata":{"operationMetadataId":"b489a7fe-00b3-4aa5-bba0-9484255f9056"},"type":"InitializeVariable","inputs":{"variables":[{"name":"startDate","type":"string","value":"'@{triggerBody()['date']}T00:00:00'"}]}},"Initialize_endDate":{"runAfter":{"Initialize_startDate":["Succeeded"]},"metadata":{"operationMetadataId":"ffb98104-5458-4fa1-be47-3950379fc90b"},"type":"InitializeVariable","inputs":{"variables":[{"name":"endDate","type":"string","value":"'@{triggerBody()['date']}T23:59:59'"}]}},"Initialize_continuationToken":{"runAfter":{"Apply_to_each_2":["Succeeded"]},"metadata":{"operationMetadataId":"ab149016-3880-4f6e-9ccc-2c1f9b56940b"},"type":"InitializeVariable","inputs":{"variables":[{"name":"continuationToken","type":"string","value":"'@{decodeUriComponent(outputs('GetActivityEventsFirstCall')?['body/continuationToken'])}'"}]}},"Do_until":{"actions":{"Set_variable":{"runAfter":{"Apply_to_each":["Succeeded"]},"metadata":{"operationMetadataId":"f82b671c-0bec-4b41-941c-345de57b2670"},"type":"SetVariable","inputs":{"name":"continuationToken","value":"@{if(empty(outputs('GetActivityEvents')?['body/continuationToken']), null,concat('''', decodeUriComponent(outputs('GetActivityEvents')?['body/continuationToken']), ''''))}"}},"Apply_to_each":{"foreach":"@outputs('GetActivityEvents')?['body/activityEventEntities']","actions":{"Append_to_array_variable":{"runAfter":{},"metadata":{"operationMetadataId":"4b4c0a67-b922-4a60-9a21-50e3245d5cf6"},"type":"AppendToArrayVariable","inputs":{"name":"activityEventEntities","value":"@item()"}}},"runAfter":{"GetActivityEvents":["Succeeded"]},"metadata":{"operationMetadataId":"5ec8b27d-117b-4d8c-94a4-af1c2110b4c4"},"type":"Foreach"},"GetActivityEvents":{"runAfter":{},"metadata":{"operationMetadataId":"0ea04f59-72d7-4a00-b505-c51962187166"},"type":"OpenApiConnection","inputs":{"host":{"apiId":"/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e","connectionName":"shared_devcamp-5fpowerbiadmin-5fe546196541960f1e","operationId":"GetActivityEvents"},"parameters":{"continuationToken":"@variables('continuationToken')"},"authentication":{"value":"@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']","type":"Raw"}}}},"runAfter":{"Initialize_continuationToken":["Succeeded"]},"expression":"@equals(variables('continuationToken'), '')","limit":{"count":60,"timeout":"PT1H"},"metadata":{"operationMetadataId":"148e2660-46f8-4a69-b391-b54ea1ca560b"},"type":"Until"},"Initialize_variable":{"runAfter":{"GetActivityEventsFirstCall":["Succeeded"]},"metadata":{"operationMetadataId":"abb5ab47-84e5-4456-bc2e-8c29b0f27c67"},"type":"InitializeVariable","inputs":{"variables":[{"name":"activityEventEntities","type":"array"}]}},"Compose":{"runAfter":{"Do_until":["Succeeded"]},"metadata":{"operationMetadataId":"a3523dc1-7b7c-4976-bfbb-ad5de00c794d"},"type":"Compose","inputs":"@variables('activityEventEntities')"},"Apply_to_each_2":{"foreach":"@variables('activityEventEntities')","actions":{"Append_to_array_variable_2":{"runAfter":{},"metadata":{"operationMetadataId":"5ecb2075-b895-45c1-b010-25d6356b30ec"},"type":"AppendToArrayVariable","inputs":{"name":"activityEventEntities","value":"@item()"}}},"runAfter":{"Initialize_variable":["Succeeded"]},"metadata":{"operationMetadataId":"6d433af2-842b-40c1-8da4-84615747f032"},"type":"Foreach"},"Respond_to_a_PowerApp_or_flow":{"runAfter":{},"metadata":{"operationMetadataId":"e80c4123-b373-4e2f-a929-c01601c2b908"},"type":"Response","kind":"PowerApp","inputs":{"statusCode":200,"body":{},"schema":{"type":"object","properties":{}}}},"Condition":{"actions":{"Create_file":{"runAfter":{},"metadata":{"operationMetadataId":"a2900ccd-f962-4588-add4-7ce6f47b20fa"},"type":"OpenApiConnection","inputs":{"host":{"apiId":"/providers/Microsoft.PowerApps/apis/shared_sharepointonline","connectionName":"shared_sharepointonline_1","operationId":"CreateFile"},"parameters":{"dataset":"https://pbi4xmas.sharepoint.com/","folderPath":"/PowerBiActivity","name":"pbievents-@{triggerBody()['date']}.json","body":"@outputs('Compose')"},"authentication":{"value":"@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']","type":"Raw"}},"runtimeConfiguration":{"contentTransfer":{"transferMode":"Chunked"}}}},"runAfter":{"Compose":["Succeeded"]},"expression":{"not":{"equals":["@length(variables('activityEventEntities'))",0]}},"metadata":{"operationMetadataId":"03523839-eca3-406c-bce7-1604b72b7c4a"},"type":"If"},"GetActivityEventsFirstCall":{"runAfter":{"Initialize_endDate":["Succeeded"]},"metadata":{"operationMetadataId":"643ab27d-9a22-42a1-9ccd-12d889aa1d98"},"type":"OpenApiConnection","inputs":{"host":{"apiId":"","connectionName":"shared_devcamp-5fpowerbiadmin-5fe546196541960f1e","operationId":"GetActivityEvents"},"parameters":{"startDateTime":"@variables('startDate')","endDateTime":"@variables('endDate')"},"authentication":{"value":"@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']","type":"Raw"}}}}}},"schemaVersion":"1.0.0.0"}
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "devcamp_sharedsharepointonline_b16ee"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      },
+      "shared_devcamp-5fpowerbiadmin-5fe546196541960f1e": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_f557a"
+        },
+        "api": {
+          "name": "shared_devcamp-5fpowerbiadmin-5fe546196541960f1e",
+          "logicalName": "devcamp_5Fpowerbiadmin"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "fc499704-ad60-42b5-91e0-ded3b0553288"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "title": "ActivityDate",
+                  "type": "string",
+                  "format": "date",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter or select a date (YYYY-MM-DD)",
+                  "x-ms-content-hint": "DATE"
+                }
+              },
+              "required": [
+                "date"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_startDate": {
+          "runAfter": {
+            "Respond_to_a_PowerApp_or_flow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b489a7fe-00b3-4aa5-bba0-9484255f9056"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "startDate",
+                "type": "string",
+                "value": "'@{triggerBody()['date']}T00:00:00'"
+              }
+            ]
+          }
+        },
+        "Initialize_endDate": {
+          "runAfter": {
+            "Initialize_startDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ffb98104-5458-4fa1-be47-3950379fc90b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "endDate",
+                "type": "string",
+                "value": "'@{triggerBody()['date']}T23:59:59'"
+              }
+            ]
+          }
+        },
+        "Initialize_continuationToken": {
+          "runAfter": {
+            "Apply_to_each_2": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ab149016-3880-4f6e-9ccc-2c1f9b56940b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "continuationToken",
+                "type": "string",
+                "value": "'@{decodeUriComponent(outputs('GetActivityEventsFirstCall')?['body/continuationToken'])}'"
+              }
+            ]
+          }
+        },
+        "Do_until": {
+          "actions": {
+            "Set_variable": {
+              "runAfter": {
+                "Apply_to_each": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f82b671c-0bec-4b41-941c-345de57b2670"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "continuationToken",
+                "value": "@{if(empty(outputs('GetActivityEvents')?['body/continuationToken']), null,concat('''', decodeUriComponent(outputs('GetActivityEvents')?['body/continuationToken']), ''''))}"
+              }
+            },
+            "Apply_to_each": {
+              "foreach": "@outputs('GetActivityEvents')?['body/activityEventEntities']",
+              "actions": {
+                "Append_to_array_variable": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "4b4c0a67-b922-4a60-9a21-50e3245d5cf6"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "activityEventEntities",
+                    "value": "@item()"
+                  }
+                }
+              },
+              "runAfter": {
+                "GetActivityEvents": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5ec8b27d-117b-4d8c-94a4-af1c2110b4c4"
+              },
+              "type": "Foreach"
+            },
+            "GetActivityEvents": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0ea04f59-72d7-4a00-b505-c51962187166"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e",
+                  "connectionName": "shared_devcamp-5fpowerbiadmin-5fe546196541960f1e",
+                  "operationId": "GetActivityEvents"
+                },
+                "parameters": {
+                  "continuationToken": "@variables('continuationToken')"
+                },
+                "authentication": {
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']",
+                  "type": "Raw"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_continuationToken": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@equals(variables('continuationToken'), '')",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "148e2660-46f8-4a69-b391-b54ea1ca560b"
+          },
+          "type": "Until"
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "GetActivityEventsFirstCall": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "abb5ab47-84e5-4456-bc2e-8c29b0f27c67"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "activityEventEntities",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Compose": {
+          "runAfter": {
+            "Do_until": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a3523dc1-7b7c-4976-bfbb-ad5de00c794d"
+          },
+          "type": "Compose",
+          "inputs": "@variables('activityEventEntities')"
+        },
+        "Apply_to_each_2": {
+          "foreach": "@variables('activityEventEntities')",
+          "actions": {
+            "Append_to_array_variable_2": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "5ecb2075-b895-45c1-b010-25d6356b30ec"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "activityEventEntities",
+                "value": "@item()"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6d433af2-842b-40c1-8da4-84615747f032"
+          },
+          "type": "Foreach"
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "e80c4123-b373-4e2f-a929-c01601c2b908"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {},
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Create_file": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "a2900ccd-f962-4588-add4-7ce6f47b20fa"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "CreateFile"
+                },
+                "parameters": {
+                  "dataset": "https://pbi4xmas.sharepoint.com/",
+                  "folderPath": "/PowerBiActivity",
+                  "name": "pbievents-@{triggerBody()['date']}.json",
+                  "body": "@outputs('Compose')"
+                },
+                "authentication": {
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']",
+                  "type": "Raw"
+                }
+              },
+              "runtimeConfiguration": {
+                "contentTransfer": {
+                  "transferMode": "Chunked"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "not": {
+              "equals": [
+                "@length(variables('activityEventEntities'))",
+                0
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "03523839-eca3-406c-bce7-1604b72b7c4a"
+          },
+          "type": "If"
+        },
+        "GetActivityEventsFirstCall": {
+          "runAfter": {
+            "Initialize_endDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "643ab27d-9a22-42a1-9ccd-12d889aa1d98"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "",
+              "connectionName": "shared_devcamp-5fpowerbiadmin-5fe546196541960f1e",
+              "operationId": "GetActivityEvents"
+            },
+            "parameters": {
+              "startDateTime": "@variables('startDate')",
+              "endDateTime": "@variables('endDate')"
+            },
+            "authentication": {
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']",
+              "type": "Raw"
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemaVersion": "1.0.0.0"
+}
