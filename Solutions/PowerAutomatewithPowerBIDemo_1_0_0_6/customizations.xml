@@ -1,0 +1,461 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Entities></Entities>
+  <Roles></Roles>
+  <Workflows>
+    <Workflow WorkflowId="{176041b8-1f52-ec11-8c62-00224806ee25}" Name="GetAccessTokenForServicePrincipal">
+      <JsonFileName>/Workflows/GetAccessTokenForServicePrincipal-176041B8-1F52-EC11-8C62-00224806EE25.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.1</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="GetAccessTokenForServicePrincipal" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{78d1ae35-e256-ec11-8f8f-000d3a11af2b}" Name="ImportPbixToWorkspace">
+      <JsonFileName>/Workflows/ImportPbixToWorkspace-78D1AE35-E256-EC11-8F8F-000D3A11AF2B.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.5</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="ImportPbixToWorkspace" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{38b81fdd-6458-ec11-8f8f-000d3a11af2b}" Name="ImportCustomerSalesPbixToWorkspace">
+      <JsonFileName>/Workflows/ImportCustomerSalesPbixToWorkspace-38B81FDD-6458-EC11-8F8F-000D3A11AF2B.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.5</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="ImportCustomerSalesPbixToWorkspace" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{29fd0a26-a039-ec11-b6e6-000d3a5ca8da}" Name="GenerateActivityEventsData">
+      <JsonFileName>/Workflows/GenerateActivityEventsData-29FD0A26-A039-EC11-B6E6-000D3A5CA8DA.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="GenerateActivityEventsData" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{a24f11c2-a039-ec11-b6e6-000d3a37bf4e}" Name="Generate Activity Data">
+      <JsonFileName>/Workflows/GenerateActivityData-A24F11C2-A039-EC11-B6E6-000D3A37BF4E.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="Generate Activity Data" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{09ffc8d9-233b-ec11-b6e5-000d3a5b2d35}" Name="Generate Activity Data fore Previous Day">
+      <JsonFileName>/Workflows/GenerateActivityDataforePreviousDay-09FFC8D9-233B-EC11-B6E5-000D3A5B2D35.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.1</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="Generate Activity Data fore Previous Day" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{b804cb8b-2152-ec11-8c62-00224806e9b3}" Name="Scan Workspace">
+      <JsonFileName>/Workflows/ScanWorkspace-B804CB8B-2152-EC11-8C62-00224806E9B3.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.1</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="Scan Workspace" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{49a19c02-fa52-ec11-8c62-00224806e9b3}" Name="GetWorkspacesAsAdmin">
+      <JsonFileName>/Workflows/GetWorkspacesAsAdmin-49A19C02-FA52-EC11-8C62-00224806E9B3.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.1</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="GetWorkspacesAsAdmin" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{f8107dae-e453-ec11-8c62-00224806e9b3}" Name="GetCapacitiesAsAdmin">
+      <JsonFileName>/Workflows/GetCapacitiesAsAdmin-F8107DAE-E453-EC11-8C62-00224806E9B3.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.1</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="GetCapacitiesAsAdmin" />
+      </LocalizedNames>
+    </Workflow>
+  </Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <CanvasApps>
+    <CanvasApp>
+      <Name>devcamp_workspacemanager_6c303</Name>
+      <AppVersion>2021-12-15T04:41:03Z</AppVersion>
+      <Status>Ready</Status>
+      <CreatedByClientVersion>3.21114.18.0</CreatedByClientVersion>
+      <MinClientVersion>3.21114.18.0</MinClientVersion>
+      <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","sienaVersion":"25fbddd9-1c20-4b6f-96f3-4bb15a1c839e","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.21114.18","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
+      <IsCdsUpgraded>0</IsCdsUpgraded>
+      <GalleryItemId xsi:nil="true"></GalleryItemId>
+      <BackgroundColor>rgba(151, 0, 0, 1)</BackgroundColor>
+      <DisplayName>Workspace Manager</DisplayName>
+      <Description xsi:nil="true"></Description>
+      <CommitMessage xsi:nil="true"></CommitMessage>
+      <Publisher xsi:nil="true"></Publisher>
+      <AuthorizationReferences>[]</AuthorizationReferences>
+      <ConnectionReferences>{"a87ed8e3-1d14-47d5-adae-6f6a1d3d6428":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png","dataSources":["ImportPbixToWorkspace"],"dependencies":["acd735f7-8ac5-4f5d-a1af-abd0e2c1b1b4"],"dependents":[],"parameterHints":{"workflowName":{"value":"2de4ecc3-5f89-40e3-8f96-4cd47ef1d6a2"},"workflowEntityId":{"value":"78d1ae35-e256-ec11-8f8f-000d3a11af2b"},"acd735f7-8ac5-4f5d-a1af-abd0e2c1b1b4":{"value":"shared_sharepointonline"}},"parameterHintsV2":{"workflowName":{"value":"2de4ecc3-5f89-40e3-8f96-4cd47ef1d6a2"},"workflowEntityId":{"value":"78d1ae35-e256-ec11-8f8f-000d3a11af2b"},"shared_sharepointonline":{"value":"acd735f7-8ac5-4f5d-a1af-abd0e2c1b1b4"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"],"isCustomApiSolutionAware":false},"acd735f7-8ac5-4f5d-a1af-abd0e2c1b1b4":{"id":"/providers/microsoft.powerapps/apis/shared_sharepointonline","displayName":"SharePoint","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1533/1.0.1533.2600/sharepointonline/icon.png","dataSources":[],"dependencies":[],"dependents":["a87ed8e3-1d14-47d5-adae-6f6a1d3d6428"],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","isCustomApiSolutionAware":false},"8d1c287b-f3bc-49af-b53a-cda4f0436253":{"id":"/providers/microsoft.powerapps/apis/shared_devcamp-5fpowerbi-5fe546196541960f1e","displayName":"PowerBi","iconUri":"https://prodapiicons.cdn.powerappscdn.net/20211205t000000z1427f729aa164c70862a8648a3d6bad1/customconnectoricon.png","dataSources":["PowerBi"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["GetWorkspaces","GetCapacities","GetDatasetsInWorkspace","GetReportsInWorkspace","GetDashboardInWorkspace","GetDataflowsInWorkspace","GetImportsInWorkspace","GetWorkspaceUsers","DeleteWorkspace","CreateWorkspace","AssignWorkspaceToCapacity","AddWorkspaceUser","GetDatasourcesInWorkspace","GetRefreshHistoryInWorkspace"],"customApiLogicalName":"devcamp_5Fpowerbi","isCustomApiSolutionAware":true}}</ConnectionReferences>
+      <DatabaseReferences>{}</DatabaseReferences>
+      <AppComponents>[]</AppComponents>
+      <AppComponentDependencies>[]</AppComponentDependencies>
+      <CanConsumeAppPass>1</CanConsumeAppPass>
+      <CanvasAppType>0</CanvasAppType>
+      <BypassConsent>0</BypassConsent>
+      <AdminControlBypassConsent>0</AdminControlBypassConsent>
+      <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <CdsDependencies>{"cdsdependencies":[{"logicalname":"devcamp_5Fpowerbi","componenttype":372,"componenttypeplatformname":"connector"}]}</CdsDependencies>
+      <IsCustomizable>1</IsCustomizable>
+      <BackgroundImageUri>/CanvasApps/devcamp_workspacemanager_6c303_BackgroundImageUri</BackgroundImageUri>
+      <DocumentUri>/CanvasApps/devcamp_workspacemanager_6c303_DocumentUri.msapp</DocumentUri>
+    </CanvasApp>
+    <CanvasApp>
+      <Name>devcamp_powerbiassetauditor_bce19</Name>
+      <AppVersion>2021-12-05T18:57:22Z</AppVersion>
+      <Status>Ready</Status>
+      <CreatedByClientVersion>3.21111.36.0</CreatedByClientVersion>
+      <MinClientVersion>3.21111.36.0</MinClientVersion>
+      <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","sienaVersion":"8484f3f6-f484-4a2d-9350-0df373e39031","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.21111.36","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
+      <IsCdsUpgraded>0</IsCdsUpgraded>
+      <GalleryItemId xsi:nil="true"></GalleryItemId>
+      <BackgroundColor>rgba(255, 191, 0, 1)</BackgroundColor>
+      <DisplayName>Power BI Asset Auditor</DisplayName>
+      <Description></Description>
+      <CommitMessage></CommitMessage>
+      <Publisher></Publisher>
+      <AuthorizationReferences>[]</AuthorizationReferences>
+      <ConnectionReferences>{"5d6a6032-f5fb-4220-88c2-2753f92e1edf":{"id":"/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e","displayName":"PowerBiAdmin","iconUri":"https://prodapiicons.cdn.powerappscdn.net/20211205t000000z6ed5db064ec54bf792451b3625ae4a2e/customconnectoricon.png","dataSources":["PowerBiAdmin"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["GetCapacitiesAsAdmin","GetRefreshablesAsAdmin","GetPipelinesAsAdmin","GetAppsAsAdmin","GetGateways","GetWorkspacesAsAdmin","GetImportsInGroup"],"customApiLogicalName":"devcamp_5Fpowerbiadmin","isCustomApiSolutionAware":true}}</ConnectionReferences>
+      <DatabaseReferences>{}</DatabaseReferences>
+      <CanvasAppType>0</CanvasAppType>
+      <BypassConsent>0</BypassConsent>
+      <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <CdsDependencies xsi:nil="true"></CdsDependencies>
+      <IsCustomizable>1</IsCustomizable>
+      <BackgroundImageUri>/CanvasApps/devcamp_powerbiassetauditor_bce19_BackgroundImageUri</BackgroundImageUri>
+      <DocumentUri>/CanvasApps/devcamp_powerbiassetauditor_bce19_DocumentUri.msapp</DocumentUri>
+    </CanvasApp>
+    <CanvasApp>
+      <Name>devcamp_scanman_e136f</Name>
+      <AppVersion>2021-12-05T18:57:18Z</AppVersion>
+      <Status>Ready</Status>
+      <CreatedByClientVersion>3.21112.22.0</CreatedByClientVersion>
+      <MinClientVersion>3.21112.22.0</MinClientVersion>
+      <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","sienaVersion":"14f235c0-df39-46c3-887a-d2c489b8fd04","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.21112.22","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false"}</Tags>
+      <IsCdsUpgraded>0</IsCdsUpgraded>
+      <GalleryItemId xsi:nil="true"></GalleryItemId>
+      <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+      <DisplayName>Scan Man</DisplayName>
+      <Description></Description>
+      <CommitMessage></CommitMessage>
+      <Publisher></Publisher>
+      <AuthorizationReferences>[]</AuthorizationReferences>
+      <ConnectionReferences>{"52298467-e268-4e19-a8b0-b48ec502a689":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png","dataSources":["GetWorkspacesAsAdmin"],"dependencies":[],"dependents":[],"parameterHints":{"workflowName":{"value":"b2f1100c-a819-4e76-9917-8139a6adcbe9"},"workflowEntityId":{"value":"49a19c02-fa52-ec11-8c62-00224806e9b3"}},"parameterHintsV2":{"workflowName":{"value":"b2f1100c-a819-4e76-9917-8139a6adcbe9"},"workflowEntityId":{"value":"49a19c02-fa52-ec11-8c62-00224806e9b3"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"ac8795ee-3738-42e5-97a2-b9f99547dde9":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png","dataSources":["ScanWorkspace"],"dependencies":[],"dependents":[],"parameterHints":{"workflowName":{"value":"50ee9746-a95c-4bdc-b744-b716ab252afd"},"workflowEntityId":{"value":"b804cb8b-2152-ec11-8c62-00224806e9b3"}},"parameterHintsV2":{"workflowName":{"value":"50ee9746-a95c-4bdc-b744-b716ab252afd"},"workflowEntityId":{"value":"b804cb8b-2152-ec11-8c62-00224806e9b3"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"c67c762f-267a-48ba-a7a3-86c9ee33bf98":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png","dataSources":["GetCapacitiesAsAdmin"],"dependencies":[],"dependents":[],"parameterHints":{"workflowName":{"value":"7a43fd03-cc90-4cc6-a408-4ef1a7e88321"},"workflowEntityId":{"value":"f8107dae-e453-ec11-8c62-00224806e9b3"}},"parameterHintsV2":{"workflowName":{"value":"7a43fd03-cc90-4cc6-a408-4ef1a7e88321"},"workflowEntityId":{"value":"f8107dae-e453-ec11-8c62-00224806e9b3"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]}}</ConnectionReferences>
+      <DatabaseReferences>{}</DatabaseReferences>
+      <CanvasAppType>0</CanvasAppType>
+      <BypassConsent>0</BypassConsent>
+      <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <CdsDependencies xsi:nil="true"></CdsDependencies>
+      <IsCustomizable>1</IsCustomizable>
+      <BackgroundImageUri>/CanvasApps/devcamp_scanman_e136f_BackgroundImageUri</BackgroundImageUri>
+      <DocumentUri>/CanvasApps/devcamp_scanman_e136f_DocumentUri.msapp</DocumentUri>
+    </CanvasApp>
+  </CanvasApps>
+  <Connectors>
+    <Connector>
+      <connectorid>af6dbd47-2ab0-4079-933a-69edcd2e00a1</connectorid>
+      <description>A sample custom connector to demonstrate calling the Power BI REST API with a user identity. Using this connector does not require Power BI Administrator permissions.</description>
+      <displayname>PowerBi</displayname>
+      <iconbrandcolor>#007ee5</iconbrandcolor>
+      <name>devcamp_5Fpowerbi</name>
+      <connectortype>1</connectortype>
+      <openapidefinition>/Connector/devcamp_5Fpowerbi_openapidefinition.json</openapidefinition>
+      <connectionparameters>/Connector/devcamp_5Fpowerbi_connectionparameters.json</connectionparameters>
+      <policytemplateinstances>/Connector/devcamp_5Fpowerbi_policytemplateinstances.json</policytemplateinstances>
+      <iconblob>/Connector/devcamp_5Fpowerbi_iconblob.Png</iconblob>
+    </Connector>
+    <Connector>
+      <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      <description>A sample custom connector which enables for building Canvas Apps and Flows which call the Power BI Admin APIs.</description>
+      <displayname>PowerBiAdmin</displayname>
+      <iconbrandcolor>#007ee5</iconbrandcolor>
+      <name>devcamp_5Fpowerbiadmin</name>
+      <connectortype>1</connectortype>
+      <openapidefinition>/Connector/devcamp_5Fpowerbiadmin_openapidefinition.json</openapidefinition>
+      <connectionparameters>/Connector/devcamp_5Fpowerbiadmin_connectionparameters.json</connectionparameters>
+      <policytemplateinstances>/Connector/devcamp_5Fpowerbiadmin_policytemplateinstances.json</policytemplateinstances>
+      <iconblob>/Connector/devcamp_5Fpowerbiadmin_iconblob.Png</iconblob>
+    </Connector>
+  </Connectors>
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbi5fe546196541960f1e_14800">
+      <connectionreferencedisplayname>PowerBi PowerAutomatewithPowerBIDemo-14800</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbi-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>af6dbd47-2ab0-4079-933a-69edcd2e00a1</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbi5fe546196541960f1e_e9285">
+      <connectionreferencedisplayname>PowerBi PowerAutomatewithPowerBIDemo-e9285</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbi-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>af6dbd47-2ab0-4079-933a-69edcd2e00a1</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_1922f">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-1922f</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_55c3e">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-55c3e</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_5deca">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-5deca</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_83586">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-83586</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_87722">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-87722</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_bb503">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-bb503</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_cfa44">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-cfa44</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_shareddevcamp5fpowerbiadmin5fe546196541960f1e_f557a">
+      <connectionreferencedisplayname>PowerBiAdmin PowerAutomatewithPowerBIDemo-f557a</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_devcamp-5fpowerbiadmin-5fe546196541960f1e</connectorid>
+      <customconnectorid>
+        <connectorid>55f24719-e06c-4715-b57e-72d8a5a67e4b</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_sharedoffice365_5543a">
+      <connectionreferencedisplayname>Office 365 Outlook</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="devcamp_sharedsharepointonline_b16ee">
+      <connectionreferencedisplayname>SharePoint PowerAutomatewithPowerBIDemo-b16ee</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

@@ -1,11 +1,11 @@
-<ImportExportXml version="9.2.21094.144" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.21111.149" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>PowerAutomatewithPowerBIDemo</UniqueName>
     <LocalizedNames>
       <LocalizedName description="Power Automate with Power BI Demo" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.6</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>powerbidevcamp</UniqueName>
@@ -77,11 +77,20 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="29" id="{09ffc8d9-233b-ec11-b6e5-000d3a5b2d35}" behavior="0" />
+      <RootComponent type="29" id="{176041b8-1f52-ec11-8c62-00224806ee25}" behavior="0" />
       <RootComponent type="29" id="{29fd0a26-a039-ec11-b6e6-000d3a5ca8da}" behavior="0" />
-      <RootComponent type="29" id="{8cc04e5c-8c2f-ec11-b6e5-0022480ab2a6}" behavior="0" />
+      <RootComponent type="29" id="{38b81fdd-6458-ec11-8f8f-000d3a11af2b}" behavior="0" />
+      <RootComponent type="29" id="{49a19c02-fa52-ec11-8c62-00224806e9b3}" behavior="0" />
+      <RootComponent type="29" id="{78d1ae35-e256-ec11-8f8f-000d3a11af2b}" behavior="0" />
       <RootComponent type="29" id="{a24f11c2-a039-ec11-b6e6-000d3a37bf4e}" behavior="0" />
-      <RootComponent type="300" schemaName="devcamp_datasetmanager_ebe5a" behavior="0" />
-      <RootComponent type="372" id="{88dd7bce-a79f-4c07-aa68-5e726ef71f95}" schemaName="devcamp_5Fpowerbirestapi" behavior="0" />
+      <RootComponent type="29" id="{b804cb8b-2152-ec11-8c62-00224806e9b3}" behavior="0" />
+      <RootComponent type="29" id="{f8107dae-e453-ec11-8c62-00224806e9b3}" behavior="0" />
+      <RootComponent type="300" schemaName="devcamp_powerbiassetauditor_bce19" behavior="0" />
+      <RootComponent type="300" schemaName="devcamp_scanman_e136f" behavior="0" />
+      <RootComponent type="300" schemaName="devcamp_workspacemanager_6c303" behavior="0" />
+      <RootComponent type="372" id="{af6dbd47-2ab0-4079-933a-69edcd2e00a1}" schemaName="devcamp_5Fpowerbi" behavior="0" />
+      <RootComponent type="372" id="{55f24719-e06c-4715-b57e-72d8a5a67e4b}" schemaName="devcamp_5Fpowerbiadmin" behavior="0" />
     </RootComponents>
     <MissingDependencies />
   </SolutionManifest>
